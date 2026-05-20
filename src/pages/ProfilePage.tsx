@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer'
 import { CARDS_DATABASE } from '../data/cards'
 
 interface ProfilePageProps {
-  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'profile') => void
+  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => void
   gold: number
   gems: number
   ownedCards: Record<string, number>
@@ -37,7 +37,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   onResetAll,
   onAddResources
 }) => {
-  const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'profile'>('profile')
+  const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'profile' | 'play'>('profile')
   
   // Input editing states
   const [isEditingPseudo, setIsEditingPseudo] = useState(false)
@@ -221,8 +221,10 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   }, [sfxVolume])
 
   // Handle page navigation helper
-  const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile') => {
-    setActiveNav(page)
+  const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => {
+    if (page !== 'play') {
+      setActiveNav(page as 'home' | 'library' | 'decks' | 'market' | 'profile')
+    }
     onNavigate(page)
   }
 

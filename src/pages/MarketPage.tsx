@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer'
 import { CARDS_DATABASE, CardData } from '../data/cards'
 
 interface MarketPageProps {
-  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile', cardId?: string) => void
+  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play', cardId?: string) => void
   gold: number
   gems: number
   ownedCards: Record<string, number>
@@ -33,20 +33,22 @@ export const MarketPage: React.FC<MarketPageProps> = ({
   onAddCards,
   onAddResources
 }) => {
-  const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'profile'>('market')
+  const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'profile' | 'play'>('market')
   const [showPurchaseDialog, setShowPurchaseDialog] = useState(false)
   const [purchasedItemName, setPurchasedItemName] = useState('')
+
+  const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => {
+    if (page !== 'play') {
+      setActiveNav(page as 'home' | 'library' | 'decks' | 'market' | 'profile')
+    }
+    onNavigate(page)
+  }
 
   // Booster opening ritual states
   const [ritualActive, setRitualActive] = useState(false)
   const [currentPackName, setCurrentPackName] = useState('')
   const [drawnCards, setDrawnCards] = useState<CardData[]>([])
   const [flippedStatus, setFlippedStatus] = useState<boolean[]>([false, false, false, false, false])
-
-  const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile') => {
-    setActiveNav(page)
-    onNavigate(page)
-  }
 
   // 3 Booster Packs configs
   const boosterPacks: BoosterPackConfig[] = [

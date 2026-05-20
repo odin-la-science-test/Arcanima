@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer'
 import { CARDS_DATABASE, CardData } from '../data/cards'
 
 interface LibraryPageProps {
-  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile', cardId?: string) => void
+  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play', cardId?: string) => void
   gold?: number
   gems?: number
   ownedCards?: Record<string, number>
@@ -24,7 +24,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({ onNavigate, gold, gems
   const [hideUnowned, setHideUnowned] = useState(false)
 
   const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => {
-    setActiveNav(page)
+    setActiveNav(page as 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play')
     onNavigate(page)
   }
 

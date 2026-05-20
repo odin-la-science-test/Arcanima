@@ -270,14 +270,15 @@ export const useGameEngine = () => {
       // AI attacks
       setTimeout(() => {
         setOpponent(opp => {
+          let newOppBoard: (ActiveCard | null)[] = [...opp.board];
+          let newOppDiscard: CardData[] = [...opp.discard];
+          
           setPlayer(plr => {
-            let newOppBoard = [...opp.board];
-            let newOppDiscard = [...opp.discard];
             let newPlrBoard = [...plr.board];
             let newPlrDiscard = [...plr.discard];
             let plrHealth = plr.health;
 
-            newOppBoard = newOppBoard.map((aiCard, ai_i) => {
+            newOppBoard = newOppBoard.map((aiCard: ActiveCard | null, ai_i: number) => {
               if (!aiCard || !aiCard.canAttack || aiCard.isEngaged) return aiCard;
 
               const targetI = newPlrBoard.findIndex(c => c !== null);

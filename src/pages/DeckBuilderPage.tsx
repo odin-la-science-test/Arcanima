@@ -3,7 +3,7 @@ import { TopAppBar, BottomNavBar } from '../components/Navigation'
 import { CARDS_DATABASE } from '../data/cards'
 
 interface DeckBuilderPageProps {
-  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile', cardId?: string) => void
+  onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play', cardId?: string) => void
   gold?: number
   gems?: number
   ownedCards?: Record<string, number>
@@ -17,7 +17,14 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
   ownedCards = {}, 
   onAddResources 
 }) => {
-  const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'profile'>('decks')
+  const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'profile' | 'play'>('decks')
+  
+  const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => {
+    if (page !== 'play') {
+      setActiveNav(page as 'home' | 'library' | 'decks' | 'market' | 'profile')
+    }
+    onNavigate(page)
+  }
   
   // Use real cards from database for the collection
   const collectionCards = CARDS_DATABASE
@@ -41,11 +48,6 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
       { id: 'fourmi_eclaireuse', name: 'Éclaireuse de la Ruche', cost: 2, count: 2, type: 'Créature - Formica Éclaireuse' }
     ]
   })
-
-  const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile') => {
-    setActiveNav(page)
-    onNavigate(page)
-  }
 
   const addCardToDeck = (card: typeof CARDS_DATABASE[0]) => {
     const ownedCount = ownedCards[card.id] || 0
