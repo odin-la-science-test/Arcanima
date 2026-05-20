@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Votre Grimoire - Aether Grimoire</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed": "#ffe088",
+                        "surface-dim": "#131316",
+                        "primary-fixed-dim": "#ddb7ff",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1f1f22",
+                        "secondary-container": "#00a572",
+                        "surface-container-highest": "#353438",
+                        "tertiary": "#e9c349",
+                        "inverse-on-surface": "#303033",
+                        "surface-container-lowest": "#0e0e11",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "surface-tint": "#ddb7ff",
+                        "on-secondary-container": "#00311f",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#2c0051",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#1b1b1e",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-tertiary": "#3c2f00",
+                        "primary-fixed": "#f0dbff",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#6900b3",
+                        "primary-container": "#b76dff",
+                        "on-surface-variant": "#cfc2d6",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-secondary": "#003824",
+                        "error": "#ffb4ab",
+                        "on-background": "#e4e1e6",
+                        "on-primary": "#490080",
+                        "background": "#131316",
+                        "on-tertiary-container": "#4e3d00",
+                        "secondary": "#4edea3",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary-container": "#cba72f",
+                        "on-primary-container": "#400071",
+                        "surface-variant": "#353438",
+                        "outline": "#988d9f",
+                        "surface-container-high": "#2a2a2d",
+                        "inverse-primary": "#842bd2",
+                        "outline-variant": "#4d4354",
+                        "on-surface": "#e4e1e6",
+                        "surface": "#131316",
+                        "inverse-surface": "#e4e1e6",
+                        "primary": "#ddb7ff",
+                        "surface-bright": "#39393c"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["JetBrains Mono"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "title-md": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"]
+                    },
+                    fontSize: {
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "title-md": ["20px", { lineHeight: "28px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "700" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for the Grimoire feel */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131316;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e9c349;
+            border-radius: 0;
+        }
+        
+        /* Ritualistic Glowing Buttons & Elements */
+        .glow-pulse:hover {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+        
+        /* Clip paths for octagonal buttons */
+        .clip-octagon {
+            clip-path: polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%);
+        }
+        
+        /* Recessed Input styling */
+        .recessed-input {
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);
+            caret-color: #ddb7ff; /* primary purple nib */
+        }
+        
+        /* Card Frame */
+        .card-frame {
+            background: #16121A;
+            box-shadow: inset 0 0 0 1px rgba(233, 195, 73, 0.3); /* Tertiary/Gold inset */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface border-b border-outline-variant bg-surface/90 backdrop-blur-md shadow-[0_0_20px_rgba(221,183,255,0.15)] fixed top-0 left-0 w-full z-50 flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-title-md font-title-md font-bold tracking-widest text-primary dark:text-primary uppercase">Aether Grimoire</span>
+<nav class="hidden md:flex gap-6">
+<!-- Inactive -->
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300 hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]" href="#">Home</a>
+<!-- Active (Library requested) -->
+<a class="text-label-sm font-label-sm text-primary border-b-2 border-tertiary pb-1 font-bold scale-95 transition-transform duration-200" href="#">Library</a>
+<!-- Inactive -->
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300 hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]" href="#">Deck Builder</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300 hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]" href="#">Marketplace</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<!-- Main Content Stage -->
+<main class="flex-1 pt-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full flex flex-col gap-8 pb-24">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-surface-container-highest pb-6">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight" style="text-shadow: 0 0 30px rgba(221,183,255,0.2);">Votre Grimoire</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Unveil the secrets within your collection.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<!-- Search -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="recessed-input w-full sm:w-64 bg-surface-container-low border-y border-x border-surface-container-highest rounded text-on-surface font-body-md text-body-md pl-10 pr-4 py-2 focus:outline-none focus:border-primary/50 transition-colors placeholder:text-outline-variant" placeholder="Search incantations..." type="text"/>
+</div>
+<!-- Sort -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-tertiary transition-colors">sort</span>
+<select class="recessed-input w-full sm:w-48 appearance-none bg-surface-container-low border-y border-x border-surface-container-highest rounded text-on-surface font-body-md text-body-md pl-10 pr-10 py-2 focus:outline-none focus:border-tertiary/50 transition-colors cursor-pointer">
+<option value="newest">Newest Whispers</option>
+<option value="power">Raw Power</option>
+<option value="cost">Mana Cost</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Layout Grid -->
+<div class="flex flex-col lg:flex-row gap-10 items-start">
+<!-- Filter Sidebar -->
+<aside class="w-full lg:w-64 flex-shrink-0 bg-surface-container-lowest border border-surface-container-highest rounded-lg p-6 space-y-8 sticky top-28">
+<!-- Faction -->
+<div>
+<h3 class="font-title-md text-title-md text-tertiary mb-4 border-b border-surface-container-highest pb-2">Faction</h3>
+<div class="flex flex-col gap-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-4 h-4 border border-outline rounded-sm flex items-center justify-center group-hover:border-primary transition-colors">
+<!-- Checked state (simulate with opacity or just leave blank for mock) -->
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-primary transition-colors">Diptera</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-4 h-4 border border-outline rounded-sm flex items-center justify-center group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[12px] text-primary">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary transition-colors">Formica</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-4 h-4 border border-outline rounded-sm flex items-center justify-center group-hover:border-primary transition-colors">
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-primary transition-colors">Animal</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-4 h-4 border border-outline rounded-sm flex items-center justify-center group-hover:border-primary transition-colors">
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-primary transition-colors">Mythic</span>
+</label>
+</div>
+</div>
+<!-- Cost -->
+<div>
+<h3 class="font-title-md text-title-md text-tertiary mb-4 border-b border-surface-container-highest pb-2">Mana Cost</h3>
+<div class="flex flex-wrap gap-2">
+<button class="w-8 h-8 rounded bg-surface-container flex items-center justify-center font-label-sm text-label-sm text-on-surface border border-outline-variant hover:border-tertiary hover:text-tertiary transition-colors">1</button>
+<button class="w-8 h-8 rounded bg-surface-container flex items-center justify-center font-label-sm text-label-sm text-on-surface border border-outline-variant hover:border-tertiary hover:text-tertiary transition-colors">2</button>
+<button class="w-8 h-8 rounded bg-primary/20 flex items-center justify-center font-label-sm text-label-sm text-primary border border-primary transition-colors">3</button>
+<button class="w-8 h-8 rounded bg-surface-container flex items-center justify-center font-label-sm text-label-sm text-on-surface border border-outline-variant hover:border-tertiary hover:text-tertiary transition-colors">4</button>
+<button class="w-8 h-8 rounded bg-surface-container flex items-center justify-center font-label-sm text-label-sm text-on-surface border border-outline-variant hover:border-tertiary hover:text-tertiary transition-colors">5+</button>
+</div>
+</div>
+<!-- Rarity -->
+<div>
+<h3 class="font-title-md text-title-md text-tertiary mb-4 border-b border-surface-container-highest pb-2">Rarity</h3>
+<div class="flex flex-col gap-3">
+<!-- Chips / Runes styling -->
+<button class="px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant font-label-sm text-label-sm flex items-center justify-between hover:border-secondary hover:text-secondary transition-all w-full text-left">
+                            Common <span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</button>
+<button class="px-3 py-1 rounded-full border border-outline-variant text-on-surface-variant font-label-sm text-label-sm flex items-center justify-between hover:border-secondary hover:text-secondary transition-all w-full text-left">
+                            Rare <span class="w-2 h-2 rounded-full bg-secondary"></span>
+</button>
+<button class="px-3 py-1 rounded-full border border-tertiary text-tertiary font-label-sm text-label-sm flex items-center justify-between bg-tertiary/10 transition-all w-full text-left">
+                            Legendary <span class="w-2 h-2 rounded-full bg-tertiary" style="box-shadow: 0 0 10px #e9c349;"></span>
+</button>
+</div>
+</div>
+<!-- Type -->
+<div>
+<h3 class="font-title-md text-title-md text-tertiary mb-4 border-b border-surface-container-highest pb-2">Type</h3>
+<div class="flex flex-col gap-2">
+<button class="text-left font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors py-1">Creature</button>
+<button class="text-left font-body-md text-body-md text-primary font-bold py-1">Spell</button>
+<button class="text-left font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors py-1">Artifact</button>
+</div>
+</div>
+</aside>
+<!-- Card Grid -->
+<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<article class="bg-[#0F0F12] p-1 rounded-xl shadow-2xl group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+<!-- Glow effect behind card -->
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-xl"></div>
+<div class="card-frame h-full w-full rounded-lg p-2 flex flex-col relative z-10">
+<!-- Image Area -->
+<div class="h-48 w-full rounded-t overflow-hidden relative border-b border-surface-container-highest">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" data-alt="A dark fantasy illustration of a glowing purple ethereal spell manifesting in a ruined obsidian temple. The lighting is dramatic and high-contrast, casting deep shadows against the stone walls. The magic emits a radiant luminance, fitting perfectly within an Ornate Brutalism aesthetic. Intricate gold filigree patterns faintly float in the air around the spell." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZYmNeSfvmkDUtEC4c_NMKXWGVYndl8IwPHyR9t8zVZvZ6sGKOOkoCfXwLC7BnhlugqQ4wuuoVncHgg_-zBIbLVYicno3VqUccEbdPyiMiNk4gksx_UgrbGMTUA03hd5HYBlxNZBocJGwC4i28qHGBOoLA49tE8h-NDKCA8nuVD-btXb8jth7HSydYB4w01JjAWgXvWoR6pDjpUxucZk_fYS-Rq8bnCobqdnAPiPfM-C6KCMwdiN-MbnH9BBWGCt-D7U1HJKth8DM"/>
+<!-- Cost Rune -->
+<div class="absolute top-2 right-2 w-8 h-8 bg-surface-container-lowest border border-tertiary rounded-full flex items-center justify-center font-title-md text-title-md text-tertiary shadow-[0_0_10px_rgba(233,195,73,0.5)]">
+                                3
+                            </div>
+</div>
+<!-- Text Area -->
+<div class="p-4 bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#16121A] flex-1 flex flex-col">
+<h4 class="font-title-md text-title-md text-primary mb-1 truncate">Void Whisper</h4>
+<p class="font-label-sm text-label-sm text-tertiary mb-3 uppercase tracking-wider">Spell - Mythic</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-3 mb-4 flex-1">
+                                Silence an opposing creature. If its power is greater than 4, draw a card from the abyss.
+                            </p>
+<!-- Action -->
+<button class="clip-octagon w-full py-2 bg-gradient-to-r from-surface-container-low via-surface-container to-surface-container-low border border-outline-variant text-on-surface font-label-sm text-label-sm hover:from-primary/20 hover:to-primary/20 hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                                Quick View
+                            </button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-[#0F0F12] p-1 rounded-xl shadow-2xl group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+<div class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-xl"></div>
+<div class="card-frame h-full w-full rounded-lg p-2 flex flex-col relative z-10">
+<div class="h-48 w-full rounded-t overflow-hidden relative border-b border-surface-container-highest">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" data-alt="A sinister, highly detailed digital painting of a biomechanical insectoid creature resembling a monstrous ant. It stands on jagged dark stone. The color palette features deep charcoal, vivid toxic green accents, and subtle gold metallic joints. The atmosphere is tense and mysterious, perfectly capturing a dark fantasy trading card game vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZaplqNmXVVxpL1bQhFZkQGDG8Q03cGe81oRCYfaU3hRyv93XB3mXbIlrWuQSzywTNJuuC1hJ-nbHRdPZvuhLj4Ey3ghIbL5UyhozrqSzariAqIBr2t2C5gWKZBl_EOuxgAldk8TuPYWH87W4eIPco-mreGpbBrKpd40QvuE5N-zTRosUpv_RUjOhcaiCLNg7cbG60q9rHFurL29avS73BrRE0izf2KLhPTBOTWEAFiRmorZ1ntHLivslFoATVrABjNhwmd36jPJE"/>
+<div class="absolute top-2 right-2 w-8 h-8 bg-surface-container-lowest border border-tertiary rounded-full flex items-center justify-center font-title-md text-title-md text-tertiary shadow-[0_0_10px_rgba(233,195,73,0.5)]">
+                                5
+                            </div>
+</div>
+<div class="p-4 bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#16121A] flex-1 flex flex-col">
+<h4 class="font-title-md text-title-md text-secondary mb-1 truncate">Formica Vanguard</h4>
+<p class="font-label-sm text-label-sm text-tertiary mb-3 uppercase tracking-wider">Creature - Formica</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-3 mb-4 flex-1">
+                                Trample. When Formica Vanguard attacks, you may sacrifice an artifact to grant it +3/+0 until end of turn.
+                            </p>
+<button class="clip-octagon w-full py-2 bg-gradient-to-r from-surface-container-low via-surface-container to-surface-container-low border border-outline-variant text-on-surface font-label-sm text-label-sm hover:from-primary/20 hover:to-primary/20 hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                                Quick View
+                            </button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-[#0F0F12] p-1 rounded-xl shadow-2xl group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+<div class="absolute inset-0 bg-tertiary/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-xl"></div>
+<div class="card-frame h-full w-full rounded-lg p-2 flex flex-col relative z-10">
+<div class="h-48 w-full rounded-t overflow-hidden relative border-b border-surface-container-highest">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105" data-alt="An ancient, ornate golden relic resting on an obsidian pedestal. The relic glows with an inner yellow and purple light, casting long shadows. The setting is a dimly lit, vast stone chamber with brutalist architecture. The visual style emphasizes heavy materiality, sharp metallic contrast, and an ominous magical presence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyYjHldmsNuQWE1-LAMY_Uf_x7_e6ua6MCXXuXQy4cbEEHclg0hoJIvKJqNZ0v0VsYRJo4qyG3vPHE16UH1pHUg60Rb-PzIMkGuLYFJzKlVGZsO_v7KEtKgNg-Q3nNRODuG4cBlYQtj1VcTYnh_MYMJcNQ1QmE4pD5_S1xcq_HB5dsW-wxPpqQQCZQcCTg5o4i-OkOLsKFrJThJ8pRYydoNiC9-J5dsAjPyR6QeMjnjb5b7OL3H589P0o7tnMEh-dVnoIkzNBgICY"/>
+<div class="absolute top-2 right-2 w-8 h-8 bg-surface-container-lowest border border-tertiary rounded-full flex items-center justify-center font-title-md text-title-md text-tertiary shadow-[0_0_10px_rgba(233,195,73,0.5)]">
+                                2
+                            </div>
+</div>
+<div class="p-4 bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#16121A] flex-1 flex flex-col">
+<h4 class="font-title-md text-title-md text-tertiary mb-1 truncate">Crown of Dust</h4>
+<p class="font-label-sm text-label-sm text-tertiary mb-3 uppercase tracking-wider">Artifact - Rare</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-3 mb-4 flex-1">
+                                Equip 1. Equipped creature gains "Whenever this creature deals damage, gain 1 life for each card in your graveyard."
+                            </p>
+<button class="clip-octagon w-full py-2 bg-gradient-to-r from-surface-container-low via-surface-container to-surface-container-low border border-outline-variant text-on-surface font-label-sm text-label-sm hover:from-primary/20 hover:to-primary/20 hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                                Quick View
+                            </button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest full-width py-12 border-t border-outline-variant mt-24 flat no shadows w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center gap-gutter">
+<span class="text-title-md font-title-md text-primary">Aether Grimoire</span>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 duration-200" href="#">The Ancient Lore</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 duration-200" href="#">Card Legality</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 duration-200" href="#">Trading Rites</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 duration-200" href="#">Privacy Sigil</a>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">© 2024 Aether Grimoire. All rights reserved by the High Council.</span>
+</footer>
+</body></html>

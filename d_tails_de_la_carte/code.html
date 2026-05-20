@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Card Details - Aether Grimoire</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffe088",
+                        "surface-dim": "#131316",
+                        "primary-fixed-dim": "#ddb7ff",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1f1f22",
+                        "secondary-container": "#00a572",
+                        "surface-container-highest": "#353438",
+                        "tertiary": "#e9c349",
+                        "inverse-on-surface": "#303033",
+                        "surface-container-lowest": "#0e0e11",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "surface-tint": "#ddb7ff",
+                        "on-secondary-container": "#00311f",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#2c0051",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-low": "#1b1b1e",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-tertiary": "#3c2f00",
+                        "primary-fixed": "#f0dbff",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#6900b3",
+                        "primary-container": "#b76dff",
+                        "on-surface-variant": "#cfc2d6",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-secondary": "#003824",
+                        "error": "#ffb4ab",
+                        "on-background": "#e4e1e6",
+                        "on-primary": "#490080",
+                        "background": "#131316",
+                        "on-tertiary-container": "#4e3d00",
+                        "secondary": "#4edea3",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary-container": "#cba72f",
+                        "on-primary-container": "#400071",
+                        "surface-variant": "#353438",
+                        "outline": "#988d9f",
+                        "surface-container-high": "#2a2a2d",
+                        "inverse-primary": "#842bd2",
+                        "outline-variant": "#4d4354",
+                        "on-surface": "#e4e1e6",
+                        "surface": "#131316",
+                        "inverse-surface": "#e4e1e6",
+                        "primary": "#ddb7ff",
+                        "surface-bright": "#39393c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "title-md": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F0F12;
+            color: #e4e1e6;
+            background-image: radial-gradient(circle at 50% 0%, #16121A 0%, #0F0F12 70%);
+            background-attachment: fixed;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131316;
+            border-left: 1px solid #cba72f20;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #842bd2;
+            border-radius: 4px;
+        }
+
+        .card-glow {
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.4), inset 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .rune-chip {
+            border: 1px solid rgba(203, 167, 47, 0.3);
+            background: rgba(19, 19, 22, 0.8);
+        }
+        
+        .action-button {
+            clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+            background: linear-gradient(135deg, #2c0051, #400071);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e9c349;
+        }
+        
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(221,183,255,0.6) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease-out, height 0.4s ease-out;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .action-button:hover::before {
+            width: 200%;
+            padding-bottom: 200%;
+        }
+        
+        .action-button-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .metallic-border {
+            border: 1px solid transparent;
+            border-image: linear-gradient(to bottom right, #e9c349, #574500) 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto bg-surface/90 backdrop-blur-md shadow-[0_0_20px_rgba(221,183,255,0.15)] border-b border-outline-variant">
+<div class="flex items-center gap-8">
+<div class="text-title-md font-title-md font-bold tracking-widest text-primary uppercase">
+                Aether Grimoire
+            </div>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-sm text-label-sm hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]" href="#">Home</a>
+<a class="text-primary border-b-2 border-tertiary pb-1 font-bold font-label-sm text-label-sm scale-95 transition-transform duration-200" href="#">Library</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-sm text-label-sm hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]" href="#">Deck Builder</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-sm text-label-sm hover:text-tertiary hover:drop-shadow-[0_0_8px_rgba(233,195,73,0.6)]" href="#">Marketplace</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<button class="hover:text-tertiary transition-colors"><span class="material-symbols-outlined">account_balance_wallet</span></button>
+<button class="hover:text-tertiary transition-colors"><span class="material-symbols-outlined">person</span></button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 mb-8 text-on-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-tertiary transition-colors" href="#">Library</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-tertiary transition-colors" href="#">Void Faction</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary">Eldritch Weaver</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Side: Card Visual -->
+<div class="lg:col-span-5 flex justify-center lg:justify-end items-start relative group">
+<!-- Ambient background glow behind card -->
+<div class="absolute inset-0 bg-primary-container/20 blur-[100px] rounded-full z-0 pointer-events-none w-3/4 h-3/4 m-auto"></div>
+<div class="relative z-10 w-full max-w-md aspect-[2.5/3.5] bg-surface-container border border-outline-variant rounded-lg p-unit shadow-2xl card-glow transition-transform duration-500 hover:scale-[1.02]">
+<div class="w-full h-full metallic-border relative overflow-hidden bg-surface-container-lowest">
+<img alt="Card Art" class="w-full h-[55%] object-cover opacity-90 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700" data-alt="A dark fantasy illustration of an Eldritch Weaver creature. The entity is composed of shifting shadow and glowing purple crystalline structures, suspended in a dark void. Ambient light sources cast deep shadows, highlighting the ornate brutalist style of the environment. The color palette heavily features deep obsidian blacks and ethereal luminescent purples, creating a mysterious and heavy atmosphere consistent with a digital grimoire." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1WIiRp4waHE85fRQpijeuQI-dr1sTz_LJ0L-D2RFdmTiffAqYCgV8IbzqONiKnvqKOt-3JgJUWVZGMf1tc1stLCTDedRfTpayJWPEpBMG4LiA6mtRdOUKyYWroNTSsoNyo_KVoFV_U-v6cYh861lMxigOYwE-9_8JMBKpd2MeSquPQ5jno3wMCeY61rB-_l4Ekm7GHwdyg-AXy_TNf_rwasYETSVDtDEheQBF9ohnBFDIPPZ9DfXLPnF8wxiopaTCmlIuewzMFiA"/>
+<!-- In-card text area imitating parchment/stone -->
+<div class="absolute bottom-0 w-full h-[45%] bg-gradient-to-t from-surface-container-lowest to-surface-container p-4 border-t border-tertiary/30">
+<h2 class="font-title-md text-title-md text-primary mb-1">Eldritch Weaver</h2>
+<p class="font-label-sm text-label-sm text-tertiary mb-2 uppercase tracking-widest">Creature - Void Entity</p>
+<p class="font-body-md text-[14px] leading-snug text-on-surface-variant italic border-l-2 border-primary/50 pl-2">
+                                "Its threads bind the very fabric of the abyss, stitching reality into nightmares."
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Details & Actions -->
+<div class="lg:col-span-7 flex flex-col gap-8 lg:pl-12">
+<header>
+<h1 class="font-display-lg text-display-lg text-inverse-surface mb-2 tracking-tight">Eldritch Weaver</h1>
+<div class="flex flex-wrap gap-3">
+<span class="rune-chip px-3 py-1 font-label-sm text-label-sm text-tertiary rounded-full uppercase tracking-wider">Mythic Rare</span>
+<span class="rune-chip px-3 py-1 font-label-sm text-label-sm text-primary rounded-full uppercase tracking-wider">Void Faction</span>
+<span class="rune-chip px-3 py-1 font-label-sm text-label-sm text-secondary rounded-full uppercase tracking-wider">Set: Awakening</span>
+</div>
+</header>
+<!-- Stats Bento -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="bg-surface-container p-4 border border-outline-variant/50 rounded flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-error mb-2 text-[32px]" style="font-variation-settings: 'FILL' 1;">swords</span>
+<span class="font-headline-lg text-headline-lg text-inverse-surface">80</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">ATK</span>
+</div>
+<div class="bg-surface-container p-4 border border-outline-variant/50 rounded flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-secondary mb-2 text-[32px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="font-headline-lg text-headline-lg text-inverse-surface">50</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">DEF</span>
+</div>
+<div class="bg-surface-container p-4 border border-outline-variant/50 rounded flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-tertiary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-tertiary mb-2 text-[32px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-headline-lg text-headline-lg text-inverse-surface">6</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Cost</span>
+</div>
+<div class="bg-surface-container p-4 border border-outline-variant/50 rounded flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-primary mb-2 text-[32px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-headline-lg text-headline-lg text-inverse-surface">2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Yield</span>
+</div>
+</div>
+<!-- Abilities & Lore -->
+<div class="bg-surface-container-low border border-outline-variant/30 p-6 relative">
+<!-- Corner ornaments -->
+<div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-tertiary/50"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-tertiary/50"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-tertiary/50"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-tertiary/50"></div>
+<div class="mb-6">
+<h3 class="font-title-md text-title-md text-primary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+                            Abilities
+                        </h3>
+<div class="space-y-4">
+<div class="bg-surface p-4 rounded border-l-2 border-primary">
+<strong class="text-inverse-surface block mb-1">Abyssal Bind [Active]</strong>
+<p class="text-on-surface-variant text-sm">Target creature loses 50% of its ATK until the end of the turn. If the target's ATK drops below 10, it is banished to the Void.</p>
+</div>
+<div class="bg-surface p-4 rounded border-l-2 border-secondary">
+<strong class="text-inverse-surface block mb-1">Shadow Weaver [Passive]</strong>
+<p class="text-on-surface-variant text-sm">Whenever a Void card is played, this creature gains +10 DEF.</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-tertiary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+                            Ancient Lore
+                        </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed columns-1 md:columns-2 gap-8 text-justify opacity-80">
+                            Deep within the fractured realms of the Aether, beyond the reach of the High Council's light, entities older than recorded time dwell in silence. The Eldritch Weaver is not merely a beast, but a manifestation of the Void's desire to consume order. It spins threads of pure nothingness, catching the unwary in webs that drain not just physical strength, but memories and mana alike. Those who have witnessed it speak of a chilling silence preceding its arrival, a sudden dimming of starlight, and the scent of ozone. To bind such a creature to one's grimoire requires a sacrifice of immense arcane power, and a willful submission to the whispering madness that accompanies its presence.
+                        </p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="action-button px-8 py-4 flex-1 min-w-[200px] flex items-center justify-center gap-3">
+<div class="action-button-content flex items-center gap-2 text-inverse-surface font-title-md text-[16px] tracking-wider uppercase">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_box</span>
+                            Ajouter au Deck
+                        </div>
+</button>
+<button class="action-button px-8 py-4 flex-1 min-w-[150px] flex items-center justify-center gap-3" style="background: linear-gradient(135deg, #1b1b1e, #2a2a2d); border-color: #988d9f;">
+<div class="action-button-content flex items-center gap-2 text-on-surface-variant font-title-md text-[16px] tracking-wider uppercase">
+<span class="material-symbols-outlined">swap_horiz</span>
+                            Échanger
+                        </div>
+</button>
+<button class="action-button px-8 py-4 flex-none w-[80px] flex items-center justify-center" style="background: linear-gradient(135deg, #1b1b1e, #2a2a2d); border-color: #988d9f;">
+<div class="action-button-content flex items-center justify-center text-error hover:text-error-container transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Related Cards -->
+<section class="mt-24 border-t border-outline-variant/30 pt-12">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-8 text-center flex items-center justify-center gap-4">
+<span class="w-12 h-px bg-gradient-to-r from-transparent to-primary/50"></span>
+                Entities of the Void
+                <span class="w-12 h-px bg-gradient-to-l from-transparent to-primary/50"></span>
+</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+<!-- Related Card 1 -->
+<a class="group block relative" href="#">
+<div class="aspect-[2.5/3.5] bg-surface-container border border-outline-variant rounded p-1 shadow-lg transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_10px_20px_rgba(168,85,247,0.2)] group-hover:border-primary/50">
+<div class="w-full h-full metallic-border relative overflow-hidden">
+<img alt="Void Lurker" class="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-500" data-alt="A shadowy creature lurking in deep fog, dark fantasy style, obsidian and purple tones, ominous atmosphere. High contrast lighting emphasizing the glowing eyes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcfTnecrWjNlCMxJGxAvnoUkn19NAVAXd74ywgChAfVrd_TBfwLh1Xyzw1h-b6Zst9eqEFrZTF2AK2QF4kKnAg1UaiuRLFo-AVovbEfpxxU1qgwM0E8SHGqFCoiVxOOjTT7cjC2c1hc6OhNIkEQk8JjskZHedp1qhL_jCnhvXu-hbyU6xdSm7k5KT35sSx6rLC9dNM2wfk3hl8MMs2sG93rNnDz4J_q7jTgezdEkw5NyUvBxG5nutLNar_Ur14rlFOR3CDTaBb34g"/>
+<div class="absolute bottom-0 w-full bg-surface-container/90 backdrop-blur-sm p-2 border-t border-tertiary/30">
+<p class="font-label-sm text-label-sm text-primary truncate text-center">Void Lurker</p>
+</div>
+</div>
+</div>
+</a>
+<!-- Related Card 2 -->
+<a class="group block relative" href="#">
+<div class="aspect-[2.5/3.5] bg-surface-container border border-outline-variant rounded p-1 shadow-lg transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_10px_20px_rgba(168,85,247,0.2)] group-hover:border-primary/50">
+<div class="w-full h-full metallic-border relative overflow-hidden">
+<img alt="Abyssal Maw" class="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-500" data-alt="A terrifying dark portal opening in a rocky landscape, dark fantasy style, glowing purple edges, deep obsidian center. Cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5FLyPOJm_-NUorAUi5PA1ZI_9SFnxRLhwtB1iCOfEUnbyRQ8xw9lmZpWG17wBf58e2VQmlD50Mn5gKkhWdpKBGG4K0uE2dR-2wyNli0ri9s7NTBQvbrWUINRhawUzhN2qX-5yB8UcZdQpq7frd1u8Es6hvdMNUyvZ1sqgoMebXGixkCx-PhSiOPhwZeHU1U6pPe4sDtAKQ1qXSkkUVwcc0DlKyQ-wLkRIrS--ZUBZREP3LPiqkPRDkUeniDCRhrY9qz_ZnVdvBOw"/>
+<div class="absolute bottom-0 w-full bg-surface-container/90 backdrop-blur-sm p-2 border-t border-tertiary/30">
+<p class="font-label-sm text-label-sm text-primary truncate text-center">Abyssal Maw</p>
+</div>
+</div>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest border-t border-outline-variant mt-24">
+<div class="text-title-md font-title-md text-primary">
+            Aether Grimoire
+        </div>
+<div class="text-on-surface-variant font-body-md text-body-md text-center">
+            © 2024 Aether Grimoire. All rights reserved by the High Council.
+        </div>
+<div class="flex gap-6 font-label-sm text-label-sm">
+<a class="text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 transition-opacity duration-200" href="#">The Ancient Lore</a>
+<a class="text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 transition-opacity duration-200" href="#">Card Legality</a>
+<a class="text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 transition-opacity duration-200" href="#">Trading Rites</a>
+<a class="text-on-surface-variant hover:text-tertiary-fixed underline decoration-tertiary/30 hover:opacity-80 transition-opacity duration-200" href="#">Privacy Sigil</a>
+</div>
+</footer>
+</body></html>

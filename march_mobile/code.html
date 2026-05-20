@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Marché de l'Arcane</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Manrope:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#490080",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-background": "#e4e1e6",
+                        "primary-fixed": "#f0dbff",
+                        "inverse-on-surface": "#303033",
+                        "on-tertiary": "#3c2f00",
+                        "on-secondary-container": "#00311f",
+                        "on-primary-container": "#400071",
+                        "tertiary": "#e9c349",
+                        "surface-container-highest": "#353438",
+                        "surface-dim": "#131316",
+                        "tertiary-container": "#cba72f",
+                        "surface-variant": "#353438",
+                        "on-primary-fixed": "#2c0051",
+                        "surface-container-high": "#2a2a2d",
+                        "outline-variant": "#4d4354",
+                        "on-tertiary-container": "#4e3d00",
+                        "primary-container": "#b76dff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e4e1e6",
+                        "secondary-container": "#00a572",
+                        "surface-tint": "#ddb7ff",
+                        "surface": "#131316",
+                        "on-surface": "#e4e1e6",
+                        "surface-container": "#1f1f22",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#ddb7ff",
+                        "secondary": "#4edea3",
+                        "tertiary-fixed": "#ffe088",
+                        "background": "#131316",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-primary-fixed-variant": "#6900b3",
+                        "on-secondary-fixed": "#002113",
+                        "surface-container-low": "#1b1b1e",
+                        "on-secondary": "#003824",
+                        "secondary-fixed-dim": "#4edea3",
+                        "inverse-primary": "#842bd2",
+                        "surface-container-lowest": "#0e0e11",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#6ffbbe",
+                        "outline": "#988d9f",
+                        "on-surface-variant": "#cfc2d6",
+                        "surface-bright": "#39393c",
+                        "primary": "#ddb7ff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "64px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Manrope"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Manrope"],
+                        "title-md": ["Playfair Display"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0F0F12; color: #e4e1e6; }
+        .ritual-glow { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+        .mana-pulse:hover { box-shadow: 0 0 30px rgba(168, 85, 247, 0.8); transition: all 0.3s ease; }
+        .filigree-border { border: 1px solid #cba72f; }
+        .obsidian-panel { background: #16121A; border: 1px solid #4d4354; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md antialiased pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant bg-surface-container/90 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+<div class="flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-tertiary">
+<img alt="Profile Avatar" class="w-full h-full object-cover" data-alt="A mystical portrait of a female mage with glowing purple eyes and dark robes. The lighting is moody, emanating from an unseen magical source. The aesthetic is dark fantasy with ornate brutalist elements, featuring deep blacks, dark purples, and subtle gold accents. The overall mood is mysterious and powerful." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn_jA-IjWvpOZdDTuenCy_iwIdLgNcQxlSIzqKcJwyUDO3NTTDs-wRm_zBN5b7PYhhz8R2TxKD9ebPDwIrnrlsxheAsJ7_6eEJmN9XYzKkl3cSzEh8B4yIC6v6hTICV-Ah30cIf-Rqofb-glgB4kF_RhvPIbIuGlHefVktbCODUMHOtk7nk2GxjFWzChd9JeyUNBSpgB1TAu7W-WVqX_rO_ZpRm5Ig2aSMgTa-fRBUh2CgEkUOalbtORZpCClagculhSyDupxq2sc"/>
+</div>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tighter">Aether Grimoire</h1>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">diamond</span>
+                    1,250
+                </span>
+</div>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile flex flex-col gap-6">
+<!-- Promo Banner -->
+<section class="relative w-full h-48 rounded-xl overflow-hidden obsidian-panel ritual-glow mt-4">
+<img alt="Hades Depths Banner" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="A dark and ominous cavern setting, illuminated by a deep, eerie purple and fiery orange glow. The scene suggests an underworld realm, with jagged obsidian rocks and mystical fog. The lighting is dramatic and high-contrast, fitting a dark fantasy aesthetic. The mood is dangerous and alluring, with subtle gold veins running through the dark stone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNdfmqXzIL4QzLK46PMgcZKvKSYmoXyoWcOi6kFnmlkin9ibQ_KJ_b7fBGDHnenm0TQD84viPGRGFz1JVTXUxrGj-j3hVJB0ue2r1HtIV4xhZDKl2QoukLH5TIRDaGavnQ-L4QJwpCdu3XbrbeAEt4jZpj_igZELURQT8zxpJ16DBtpzkHgYBPwjy4xlMgDpw3omro1j-Dq2opySeo9TjsGVxnMZbDOyAVHiev5XJChJQfW2vrLiOoPXxuvT_n7OK9LpNy8jBJPjE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-4">
+<span class="inline-block px-2 py-1 mb-2 border border-tertiary rounded-DEFAULT font-label-sm text-label-sm text-tertiary uppercase tracking-widest bg-surface/50 backdrop-blur-sm">Nouveau Set</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary-fixed-dim">Les Profondeurs d'Hadès</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Découvrez des reliques interdites.</p>
+</div>
+</section>
+<!-- Categories -->
+<section>
+<h3 class="font-title-md text-title-md text-on-surface mb-4">Rayons du Marché</h3>
+<div class="grid grid-cols-2 gap-4">
+<!-- Boosters -->
+<div class="obsidian-panel rounded-xl p-4 flex flex-col items-center justify-center gap-3 relative overflow-hidden mana-pulse cursor-pointer group h-32">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">style</span>
+<span class="font-title-md text-title-md text-on-surface">Boosters</span>
+</div>
+<!-- Cartes -->
+<div class="obsidian-panel rounded-xl p-4 flex flex-col items-center justify-center gap-3 relative overflow-hidden mana-pulse cursor-pointer group h-32">
+<div class="absolute inset-0 bg-tertiary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-4xl text-tertiary drop-shadow-[0_0_10px_rgba(233,195,73,0.5)]">auto_awesome</span>
+<span class="font-title-md text-title-md text-on-surface">Cartes</span>
+</div>
+<!-- Accessoires -->
+<div class="obsidian-panel rounded-xl p-4 flex flex-col items-center justify-center gap-3 relative overflow-hidden mana-pulse cursor-pointer group col-span-2 h-24">
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-3xl text-secondary drop-shadow-[0_0_10px_rgba(78,222,163,0.5)]">category</span>
+<span class="font-title-md text-title-md text-on-surface">Accessoires</span>
+</div>
+</div>
+</section>
+<!-- Special Offers -->
+<section class="mb-8">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-title-md text-title-md text-on-surface">Offres Spéciales</h3>
+<span class="font-label-sm text-label-sm text-primary cursor-pointer hover:underline">Voir tout</span>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 snap-x">
+<!-- Offer 1 -->
+<div class="snap-center shrink-0 w-40 obsidian-panel rounded-lg p-2 flex flex-col relative border border-outline-variant/50">
+<div class="absolute top-2 right-2 bg-error text-on-error font-label-sm text-label-sm px-1.5 py-0.5 rounded-DEFAULT z-10">-20%</div>
+<div class="w-full h-32 bg-surface-container-lowest rounded-DEFAULT mb-2 overflow-hidden flex items-center justify-center relative">
+<img alt="Booster Pack" class="object-cover w-full h-full opacity-80" data-alt="A stylized digital illustration of a mystical booster pack for a card game. The pack is glowing with a deep violet aura against a pure black background. Ornate gold filigree lines the edges of the pack, hinting at its premium nature. The lighting is dramatic, focused purely on the object, fitting a dark fantasy UI style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7IK_mggLj80sRg5zUQ3gNmZaJ983MHebkPQ4HNTi788VsYAjeM8jtzU1rLWe5xsDrm2BubJNE-8d3yVgS0pvEvRL1CEs2SBqeKVjp5l734dNUKRWt5JbZSdjv7VCnDLPQuXSPLIFg696b51r_3tC-xrPOC1l3MIR30uwn2DiHHk-lLs8nThTGcW_lmldPsTRROopUGjO_Fw_Ia8YGLCqQ74HfHg7rJWmyiwiVhrB9JTa20cD43Q1qnVsSwVd29gDokokmUmcvxMo"/>
+</div>
+<h4 class="font-body-md text-body-md text-on-surface truncate">Pack Infernal</h4>
+<div class="flex items-center justify-between mt-2">
+<span class="font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">diamond</span>
+                            500
+                        </span>
+<span class="font-label-sm text-label-sm text-outline line-through">650</span>
+</div>
+</div>
+<!-- Offer 2 -->
+<div class="snap-center shrink-0 w-40 obsidian-panel rounded-lg p-2 flex flex-col relative border border-outline-variant/50">
+<div class="w-full h-32 bg-surface-container-lowest rounded-DEFAULT mb-2 overflow-hidden flex items-center justify-center relative">
+<img alt="Rare Card" class="object-cover w-full h-full opacity-80" data-alt="A single, highly detailed fantasy trading card resting in a dark void. The card depicts a glowing arcane sigil in neon green and deep purple. The card itself has a dark stone texture with an inscribed gold border. The lighting casts a soft ambient glow onto the surrounding dark surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOFkeQzNpptfRwQxwYICQBCOZNK9U-VqBUNb_jO2vIm9wkwlNwKmFfGFhodPgdKmT3qQGGMSIByvp-sNpR71WlNOEcWUF4IBr7j52LIPikje9sK7E6UwTpMUT08J3GIChufHlryCecEmeRxNWJBHtCsIzNdGx6uxg51C1Bl3XUx8tr9foMFK11-qdDq_JPPmnZuU0ygnH5un4wW9v5aHHSz8zhLatDkY9rz-ZrCI3NAPLa--cqS6Ckex-R66t1qS-GykdKp7jxrfs"/>
+</div>
+<h4 class="font-body-md text-body-md text-on-surface truncate">Gantelet d'Aether</h4>
+<div class="flex items-center mt-2">
+<span class="font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">toll</span>
+                            2,500
+                        </span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 border-t border-outline-variant bg-surface-container-highest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.5)] rounded-t-full md:hidden">
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-sm text-label-sm mt-1">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="font-label-sm text-label-sm mt-1">Decks</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 animate-pulse scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-sm text-label-sm mt-1">Market</span>
+</a>
+</nav>
+</body></html>
