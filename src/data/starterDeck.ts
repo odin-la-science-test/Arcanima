@@ -17,7 +17,7 @@ export const STARTER_DECK: DeckEntry[] = [
   // === Coût 2 (14 cartes) ===
   { id: 'gorilla', count: 2 },               // 17 atk / 12 def - provocation
   { id: 'fourmi_eclaireuse', count: 2 },     // 20 atk / 15 def - célérité
-  { id: 'faucon_aether', count: 2 },         // 20 atk / 15 def - célérité
+  { id: 'faucon_Arcanima', count: 2 },         // 20 atk / 15 def - célérité
   { id: 'singe_eclaireur', count: 2 },       // 22 atk / 18 def - esquive
   { id: 'corbeau_spectral', count: 2 },      // 15 atk / 20 def - immunité sorts
   { id: 'poisson_lanterne', count: 2 },      // 10 atk / 25 def - -10 atk adverse

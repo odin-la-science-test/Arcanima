@@ -11,6 +11,8 @@ interface MarketPageProps {
   onBuyCard: (cardId: string, cost: number, currency: 'gold' | 'gems') => boolean
   onAddCards: (cardIds: string[]) => void
   onAddResources: () => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
 interface BoosterPackConfig {
@@ -209,7 +211,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
   }
 
   return (
-    <div className="antialiased min-h-screen flex flex-col selection:bg-primary selection:text-on-primary bg-[#0F0F12]">
+    <div className="antialiased min-h-screen flex flex-col selection:bg-primary selection:text-on-primary bg-background">
       
       {/* Contain custom backface classes within a standard <style> tag so it works seamlessly inside windows webapp */}
       <style dangerouslySetInnerHTML={{__html: `
@@ -352,7 +354,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
         <section id="boosters-section" className="mb-16">
           <div className="flex items-center gap-4 mb-8 border-b border-outline-variant pb-4">
             <h2 className="text-headline-lg font-headline-lg text-inverse-surface">Sceaux de Boosters</h2>
-            <span className="text-xs text-on-surface-variant bg-[#16121A] px-3 py-1 border border-outline-variant rounded-full font-mono uppercase tracking-widest select-none">
+            <span className="text-xs text-on-surface-variant bg-surface-container dark:bg-[#16121A] px-3 py-1 border border-outline-variant rounded-full font-mono uppercase tracking-widest select-none">
               Invocations multiples
             </span>
           </div>
@@ -377,7 +379,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
                     src={pack.image}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                  <span className="absolute bottom-3 left-3 text-[10px] bg-[#16121A]/85 backdrop-blur px-2.5 py-1 border border-outline-variant rounded-full text-inverse-surface font-mono tracking-widest font-bold uppercase">
+                  <span className="absolute bottom-3 left-3 text-[10px] bg-surface-container dark:bg-[#16121A]/85 backdrop-blur px-2.5 py-1 border border-outline-variant rounded-full text-inverse-surface font-mono tracking-widest font-bold uppercase">
                     5 Cartes
                   </span>
                 </div>
@@ -393,7 +395,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
                   <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-outline-variant/30">
                     <button 
                       onClick={() => handleBuyPack(pack, 'gold')}
-                      className="px-2 py-2 bg-[#1C1822] hover:bg-surface-container border border-outline-variant rounded font-label-sm text-[11px] text-tertiary flex items-center justify-center gap-1 transition-all uppercase font-bold"
+                      className="px-2 py-2 bg-surface-container-high dark:bg-[#1C1822] hover:bg-surface-container border border-outline-variant rounded font-label-sm text-[11px] text-tertiary flex items-center justify-center gap-1 transition-all uppercase font-bold"
                     >
                       <span className="material-symbols-outlined text-xs">toll</span>
                       {pack.goldCost} Or
@@ -503,7 +505,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
               Sceau Brisé : {currentPackName}
             </span>
             <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-inverse-surface mb-8 drop-shadow-[0_0_20px_rgba(221,183,255,0.4)]">
-              Rituel d'Éveil de l'Aether
+              Rituel d'Éveil de l'Arcanima
             </h2>
 
             {/* Drawn Cards Stage (5 Cards circular/horizontal alignment) */}
@@ -521,7 +523,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
                     <div className={`w-full h-full duration-700 transform-style-3d relative transition-transform ${isFlipped ? 'rotate-y-180' : ''}`}>
                       
                       {/* CARD BACK */}
-                      <div className="absolute inset-0 backface-hidden bg-[#16121A] border-2 border-tertiary rounded-xl p-3 flex flex-col items-center justify-center shadow-[0_0_20px_rgba(233,195,73,0.3)]">
+                      <div className="absolute inset-0 backface-hidden bg-surface-container dark:bg-[#16121A] border-2 border-tertiary rounded-xl p-3 flex flex-col items-center justify-center shadow-[0_0_20px_rgba(233,195,73,0.3)]">
                         <div className="border border-tertiary/40 w-full h-full rounded-lg flex flex-col items-center justify-center relative overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#2D1B40] via-[#110A1A] to-[#16121A]">
                           <span className="material-symbols-outlined text-tertiary text-4xl animate-pulse">auto_awesome</span>
                           <span className="text-[6px] tracking-widest text-tertiary/60 uppercase absolute bottom-4 font-mono">Toucher pour révéler</span>
@@ -529,7 +531,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
                       </div>
 
                       {/* CARD FRONT */}
-                      <div className={`absolute inset-0 backface-hidden rotate-y-180 bg-[#0F0F12] rounded-xl overflow-hidden border ${getRarityGlow(card.rarity)} flex flex-col`}>
+                      <div className={`absolute inset-0 backface-hidden rotate-y-180 bg-background rounded-xl overflow-hidden border ${getRarityGlow(card.rarity)} flex flex-col`}>
                         {isCompleteVisual ? (
                           <div className="h-full w-full relative z-10 flex flex-col justify-between p-0.5">
                             <div className="flex-1 w-full h-full overflow-hidden rounded-lg relative">
@@ -547,7 +549,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
                             </div>
                             
                             {/* Card lore and name */}
-                            <div className="p-2 bg-[#16121A] flex-grow flex flex-col justify-between rounded-b">
+                            <div className="p-2 bg-surface-container dark:bg-[#16121A] flex-grow flex flex-col justify-between rounded-b">
                               <div>
                                 <h4 className={`text-[11px] font-bold truncate ${getRarityTextColor(card.rarity)}`}>{card.title}</h4>
                                 <p className="text-[7px] text-tertiary font-mono tracking-widest uppercase mb-1">{card.type}</p>
@@ -574,7 +576,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
               {!flippedStatus.every(Boolean) ? (
                 <button 
                   onClick={handleRevealAll}
-                  className="w-full py-3 bg-[#1C1822] hover:bg-surface-container border border-outline-variant text-inverse-surface font-title-md rounded-lg flex items-center justify-center gap-2 uppercase tracking-wider"
+                  className="w-full py-3 bg-surface-container-high dark:bg-[#1C1822] hover:bg-surface-container border border-outline-variant text-inverse-surface font-title-md rounded-lg flex items-center justify-center gap-2 uppercase tracking-wider"
                 >
                   <span className="material-symbols-outlined">visibility</span>
                   Tout Révéler
@@ -596,7 +598,7 @@ export const MarketPage: React.FC<MarketPageProps> = ({
       {/* Individual Card Purchase Success Dialog */}
       {showPurchaseDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 animate-fade-in">
-          <div className="bg-[#16121A] border border-tertiary rounded-xl p-8 max-w-sm w-full text-center shadow-[0_0_30px_rgba(233,195,73,0.3)] relative">
+          <div className="bg-surface-container dark:bg-[#16121A] border border-tertiary rounded-xl p-8 max-w-sm w-full text-center shadow-[0_0_30px_rgba(233,195,73,0.3)] relative">
             <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-tertiary"></div>
             <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-tertiary"></div>
             <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-tertiary"></div>

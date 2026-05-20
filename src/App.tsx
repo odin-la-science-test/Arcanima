@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import HomePage from './pages/HomePage'
 import LibraryPage from './pages/LibraryPage'
 import DeckBuilderPage from './pages/DeckBuilderPage'
@@ -64,6 +64,61 @@ function App() {
     const saved = localStorage.getItem('arcanima_packs_opened')
     return saved ? Number(saved) : 0
   })
+
+  // Global Theme State
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('arcanima_theme')
+    return (saved as 'light' | 'dark') || 'dark'
+  })
+
+  const toggleTheme = () => {
+    document.documentElement.classList.add('theme-transitioning')
+    
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark'
+      localStorage.setItem('arcanima_theme', next)
+      return next
+    })
+
+    setTimeout(() => {
+      document.documentElement.classList.remove('theme-transitioning')
+    }, 500)
+  }
+
+  // Sync theme to document body/html so Tailwind darkMode: 'class' triggers globally
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [theme])
+
+  // Global Audio State
+  const [musicEnabled, setMusicEnabled] = useState<boolean>(() => {
+    const saved = localStorage.getItem('arcanima_setting_ambient')
+    return saved !== 'false' // default to true, or we can default to false. Since the original ProfilePage defaulted to 'saved !== false', let's stick with that.
+  })
+
+  const toggleMusic = () => {
+    setMusicEnabled(prev => {
+      const next = !prev
+      localStorage.setItem('arcanima_setting_ambient', String(next))
+      return next
+    })
+  }
+
+  const audioRef = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (musicEnabled) {
+        audioRef.current.play().catch(e => console.warn("Audio autoplay blocked by browser until user interacts.", e))
+      } else {
+        audioRef.current.pause()
+      }
+    }
+  }, [musicEnabled])
 
   // State synchronization with localStorage
   const updateGold = (value: number | ((prev: number) => number)) => {
@@ -165,13 +220,22 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-on-background dark">
+    <div className={`min-h-screen bg-background text-on-background ${theme === 'dark' ? 'dark' : ''}`}>
+      {/* Global Ambient Audio */}
+      <audio 
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+        loop 
+        ref={audioRef}
+      />
+
       {navigation.current === 'home' && (
         <HomePage 
           onNavigate={navigateTo} 
           gold={gold} 
           gems={gems} 
           onAddResources={devAddResources} 
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
       )}
       {navigation.current === 'library' && (
@@ -181,6 +245,8 @@ function App() {
           gems={gems} 
           ownedCards={ownedCards} 
           onAddResources={devAddResources} 
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
       )}
       {navigation.current === 'decks' && (
@@ -190,6 +256,8 @@ function App() {
           gems={gems} 
           ownedCards={ownedCards} 
           onAddResources={devAddResources} 
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
       )}
       {navigation.current === 'market' && (
@@ -201,6 +269,8 @@ function App() {
           onBuyCard={buyCard}
           onAddCards={addCardsToCollection}
           onAddResources={devAddResources}
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
       )}
       {navigation.current === 'card-detail' && (
@@ -224,6 +294,10 @@ function App() {
           onChangePseudonym={updatePseudonym}
           onResetAll={handleResetAll}
           onAddResources={devAddResources}
+          ambientAudio={musicEnabled}
+          onToggleAmbientAudio={toggleMusic}
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
       )}
       {navigation.current === 'play' && (

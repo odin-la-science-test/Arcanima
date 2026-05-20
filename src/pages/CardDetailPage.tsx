@@ -85,7 +85,7 @@ export const CardDetailPage: React.FC<CardDetailPageProps> = ({ onNavigate, card
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container bg-[#0F0F12]">
+    <div className="min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container bg-background">
       {/* TopNavBar */}
       <TopAppBar 
         title="" 
@@ -119,7 +119,7 @@ export const CardDetailPage: React.FC<CardDetailPageProps> = ({ onNavigate, card
             <div className={`absolute inset-0 blur-[100px] rounded-full z-0 pointer-events-none w-3/4 h-3/4 m-auto ${getRarityGlow(card.rarity)}`}></div>
             
             {card.image.startsWith('/') ? (
-              <div className="relative z-10 w-full max-w-sm aspect-[2.5/3.5] bg-[#0F0F12] border border-outline-variant/30 rounded-lg p-1 shadow-2xl card-glow transition-transform duration-500 hover:scale-[1.02]">
+              <div className="relative z-10 w-full max-w-sm aspect-[2.5/3.5] bg-background border border-outline-variant/30 rounded-lg p-1 shadow-2xl card-glow transition-transform duration-500 hover:scale-[1.02]">
                 <img 
                   alt={card.title} 
                   className="w-full h-full object-contain rounded-lg" 
@@ -150,7 +150,7 @@ export const CardDetailPage: React.FC<CardDetailPageProps> = ({ onNavigate, card
                       <p className="font-label-sm text-label-sm text-tertiary mb-2 uppercase tracking-widest truncate">{card.type}</p>
                     </div>
                     <p className="font-body-md text-[13px] leading-snug text-on-surface-variant italic border-l-2 border-primary/50 pl-2 line-clamp-3">
-                      "{card.lore || 'Un artefact baigné d\'essences spectrales provenant des limbes d\'Aether.'}"
+                      "{card.lore || 'Un artefact baigné d\'essences spectrales provenant des limbes d\'Arcanima.'}"
                     </p>
                   </div>
 
@@ -257,7 +257,7 @@ export const CardDetailPage: React.FC<CardDetailPageProps> = ({ onNavigate, card
                 </h3>
                 <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed columns-1 md:columns-2 gap-8 text-justify opacity-80 text-sm">
                   {card.lore || 'Aucun grimoire n\'a encore consigné l\'origine exacte de cet arcane. Il est dit que quiconque tente d\'en percer le mystère s\'expose aux murmures insidieux du grand Néant.'}
-                  {' '}{card.lore && "Les écrits sacrés du Haut Conseil de l'Aether stipulent que cette entité a traversé les failles stellaires bien avant l'avènement du grand calendrier des tisseurs, devenant une pièce capitale dans l'équilibre des forces de la nature."}
+                  {' '}{card.lore && "Les écrits sacrés du Haut Conseil de l'Arcanima stipulent que cette entité a traversé les failles stellaires bien avant l'avènement du grand calendrier des tisseurs, devenant une pièce capitale dans l'équilibre des forces de la nature."}
                 </p>
               </div>
             </div>

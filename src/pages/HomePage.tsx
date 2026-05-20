@@ -7,9 +7,11 @@ interface HomePageProps {
   gold?: number
   gems?: number
   onAddResources?: () => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAddResources }) => {
+export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAddResources, theme, onToggleTheme }) => {
   const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play'>('home')
 
   const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => {
@@ -18,7 +20,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAd
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0F0F12] relative overflow-x-hidden antialiased">
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden antialiased">
       {/* TopNavBar */}
       <TopAppBar 
         title="" 
@@ -27,10 +29,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAd
         gold={gold}
         gems={gems}
         onAddResources={onAddResources}
+        theme={theme}
+        onToggleTheme={onToggleTheme}
       />
 
       {/* Main Content */}
-      <main className="flex-grow pt-16 md:pt-24 pb-24 md:pb-0">
+      <main className="flex-grow pb-24 md:pb-0">
         
         {/* Hero Section */}
         <section className="relative w-full min-h-[716px] flex items-center justify-center overflow-hidden mb-24">
@@ -40,14 +44,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAd
               className="w-full h-full object-cover opacity-30" 
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyF8VyuYmLbw6i721nNXrBU4-D4_Qrqxvz4m9OjmgWZkaXXo7UmK_gMhgBDcypIMBHhBDsQu25L0LCkGAAwHZysSNKJsQBeNB-FWjiz9hb6j3NJd8uhZrrhQhtJZFEb13Pr9x0ocKKriOvhx6bjAPYl657HxRQ5a4NHzrVHxUkkB10c1mVSgwZJjDaN9ZgeecVwG8NAf49X9iprI2jPeyXPZ8RFXFjRm84Z6XKsuxad82tLtSnBRzHDNwLss8dcbwC4eINOhajV-g"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0F0F12]"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background"></div>
           </div>
           <div className="relative z-10 text-center px-gutter max-w-4xl mx-auto flex flex-col items-center gap-8">
             <h1 className="text-display-lg font-display-lg text-primary drop-shadow-[0_0_30px_rgba(221,183,255,0.8)] px-4">
               Entrez dans l'Archive Éternelle
             </h1>
             <p className="text-body-lg font-body-lg text-on-surface-variant max-w-2xl px-4">
-              Découvrez les secrets anciens, collectionnez les artefacts de pouvoir et forgez votre destinée dans le grand registre d'Aether.
+              Découvrez les secrets anciens, collectionnez les artefacts de pouvoir et forgez votre destinée dans le grand registre d'Arcanima.
             </p>
             <button 
               onClick={() => handleNavigation('library')}
@@ -75,7 +79,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAd
               className="relative group cursor-pointer"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-tertiary to-primary opacity-50 blur-lg group-hover:opacity-100 transition duration-500 rounded-xl"></div>
-              <div className="relative bg-[#16121A] p-2 border border-tertiary/50 rounded-xl h-[450px] flex flex-col card-glow">
+              <div className="relative bg-surface-container-low dark:bg-surface-container dark:bg-[#16121A] p-2 border border-tertiary/50 rounded-xl h-[450px] flex flex-col card-glow">
                 <div className="h-2/3 bg-surface-container-high rounded-t-lg overflow-hidden border-b border-tertiary/30">
                   <img 
                     alt="Béhémoth d'Obsidienne" 
@@ -101,7 +105,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAd
               className="relative group cursor-pointer md:-translate-y-8"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-inverse-primary opacity-70 blur-lg group-hover:opacity-100 transition duration-500 rounded-xl"></div>
-              <div className="relative bg-[#16121A] p-2 border border-primary/50 rounded-xl h-[450px] flex flex-col card-glow z-10">
+              <div className="relative bg-surface-container-low dark:bg-surface-container dark:bg-[#16121A] p-2 border border-primary/50 rounded-xl h-[450px] flex flex-col card-glow z-10">
                 <div className="h-2/3 bg-surface-container-high rounded-t-lg overflow-hidden border-b border-primary/30">
                   <img 
                     alt="Astrolabe du Néant" 
@@ -127,7 +131,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAd
               className="relative group cursor-pointer"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-secondary-container to-tertiary opacity-50 blur-lg group-hover:opacity-100 transition duration-500 rounded-xl"></div>
-              <div className="relative bg-[#16121A] p-2 border border-tertiary/50 rounded-xl h-[450px] flex flex-col card-glow">
+              <div className="relative bg-surface-container-low dark:bg-surface-container dark:bg-[#16121A] p-2 border border-tertiary/50 rounded-xl h-[450px] flex flex-col card-glow">
                 <div className="h-2/3 bg-surface-container-high rounded-t-lg overflow-hidden border-b border-tertiary/30">
                   <img 
                     alt="Sylve Corrompue" 

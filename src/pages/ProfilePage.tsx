@@ -13,6 +13,10 @@ interface ProfilePageProps {
   onChangePseudonym: (name: string) => void
   onResetAll: () => void
   onAddResources: () => void
+  ambientAudio: boolean
+  onToggleAmbientAudio: () => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
 interface Particle {
@@ -35,7 +39,9 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   packsOpened,
   onChangePseudonym,
   onResetAll,
-  onAddResources
+  onAddResources,
+  ambientAudio,
+  onToggleAmbientAudio
 }) => {
   const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'profile' | 'play'>('profile')
   
@@ -56,10 +62,6 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   const [showLevelUpEffect, setShowLevelUpEffect] = useState(false)
 
   // Audio simulation settings
-  const [ambientAudio, setAmbientAudio] = useState(() => {
-    const saved = localStorage.getItem('arcanima_setting_ambient')
-    return saved !== 'false'
-  })
   const [sfxVolume, setSfxVolume] = useState(() => {
     const saved = localStorage.getItem('arcanima_setting_sfx')
     return saved ? Number(saved) : 80
@@ -99,7 +101,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
 
   // Guild Title based on collection size
   const guildTitle = useMemo(() => {
-    if (ownedUniqueCount >= 30) return "Archimage de l'Aether"
+    if (ownedUniqueCount >= 30) return "Archimage de l'Arcanima"
     if (ownedUniqueCount >= 20) return "Seigneur du Grimoire"
     if (ownedUniqueCount >= 10) return "Maître des Runes"
     if (ownedUniqueCount >= 5) return "Apprenti Invocateur"
@@ -213,10 +215,6 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   }, [xp, level])
 
   useEffect(() => {
-    localStorage.setItem('arcanima_setting_ambient', String(ambientAudio))
-  }, [ambientAudio])
-
-  useEffect(() => {
     localStorage.setItem('arcanima_setting_sfx', String(sfxVolume))
   }, [sfxVolume])
 
@@ -241,7 +239,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
     }
     onChangePseudonym(trimmed)
     setIsEditingPseudo(false)
-    setPseudoMessage("✨ Pseudo gravé avec succès dans l'Aether")
+    setPseudoMessage("✨ Pseudo gravé avec succès dans l'Arcanima")
     setTimeout(() => setPseudoMessage(null), 3000)
     spawnMagicParticles(15, '#e9c349')
   }
@@ -335,7 +333,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   const xpPercentage = Math.min(100, Math.max(0, (xp / maxBarXp) * 100))
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0F0F12] relative overflow-x-hidden antialiased select-none pb-24 md:pb-6">
+    <div className="min-h-screen flex flex-col bg-background relative overflow-x-hidden antialiased select-none pb-24 md:pb-6">
       
       {/* Visual Floating Particle Overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
@@ -359,7 +357,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
       {/* Level Up Celebration Overlay */}
       {showLevelUpEffect && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 backdrop-blur-md animate-fade-in">
-          <div className="p-8 max-w-md w-full bg-[#16121A] border-2 border-tertiary rounded-xl card-frame text-center card-glow flex flex-col items-center gap-6">
+          <div className="p-8 max-w-md w-full bg-surface-container dark:bg-[#16121A] border-2 border-tertiary rounded-xl card-frame text-center card-glow flex flex-col items-center gap-6">
             <span className="material-symbols-outlined text-[64px] text-tertiary animate-bounce" style={{ fontVariationSettings: "'FILL' 1" }}>
               workspace_premium
             </span>
@@ -367,7 +365,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
               Éveil Supérieur !
             </h2>
             <p className="text-body-md text-on-surface-variant">
-              Votre maîtrise de l'Aether s'est accrue. Vous atteignez le rang spirituel de :
+              Votre maîtrise de l'Arcanima s'est accrue. Vous atteignez le rang spirituel de :
             </p>
             <div className="text-headline-md font-bold text-tertiary uppercase tracking-widest px-6 py-2 border border-tertiary/40 bg-surface-container-high rounded">
               Niveau {level}
@@ -398,7 +396,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
       <main className="flex-grow pt-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
         
         {/* Legendary Header Identity Card */}
-        <section className="relative w-full mb-12 p-1 border border-outline-variant bg-[#16121A] rounded-xl overflow-hidden card-glow shadow-[0_0_40px_rgba(132,43,210,0.15)]">
+        <section className="relative w-full mb-12 p-1 border border-outline-variant bg-surface-container dark:bg-[#16121A] rounded-xl overflow-hidden card-glow shadow-[0_0_40px_rgba(132,43,210,0.15)]">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-950/10 via-transparent to-yellow-950/10 z-0"></div>
           
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 p-6 md:p-8 parchment-bg rounded-lg">
@@ -622,7 +620,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
                 </div>
                 <div className="text-label-sm text-[#e9c349] font-semibold flex items-center gap-1">
                   <span className="material-symbols-outlined text-[14px]">stars</span>
-                  {packsOpened * 5} sceaux d'aether brisés
+                  {packsOpened * 5} sceaux d'Arcanima brisés
                 </div>
               </div>
               <div className="text-[10px] text-on-surface-variant font-mono tracking-widest uppercase mt-3">
@@ -726,7 +724,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
                   </span>
                 </div>
                 <button
-                  onClick={() => setAmbientAudio(prev => !prev)}
+                  onClick={onToggleAmbientAudio}
                   className={`w-14 h-8 rounded-full p-1 transition-colors duration-300 focus:outline-none ${ambientAudio ? 'bg-[#842bd2]' : 'bg-black/60 border border-outline'}`}
                 >
                   <div className={`w-6 h-6 rounded-full bg-white shadow-md transform transition-transform duration-300 ${ambientAudio ? 'translate-x-6' : 'translate-x-0'}`} />
@@ -762,7 +760,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
             <div className="flex items-center gap-2 border-b border-outline-variant pb-3">
               <span className="material-symbols-outlined text-tertiary">component_exchange</span>
               <h3 className="text-title-lg font-bold text-primary tracking-wide uppercase">
-                Rites d'Aether & Sortilèges
+                Rites d'Arcanima & Sortilèges
               </h3>
             </div>
 
@@ -773,7 +771,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
                 <div className="flex flex-col text-center sm:text-left">
                   <span className="text-body-md font-bold text-[#e9c349] flex items-center gap-1.5 justify-center sm:justify-start">
                     <span className="material-symbols-outlined text-[20px]">auto_awesome</span>
-                    Forger l'Aether
+                    Forger l'Arcanima
                   </span>
                   <span className="text-label-sm text-on-surface-variant">
                     Octroyer +1 000 pièces d'Or et +100 Joyaux
@@ -816,7 +814,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
       {/* Double Confirmation Reset Modal Dialog */}
       {showResetModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in">
-          <div className="w-full max-w-md bg-[#16121A] border-2 border-error rounded-xl p-6 card-frame text-center card-glow flex flex-col gap-6 shadow-[0_0_50px_rgba(239,68,68,0.3)]">
+          <div className="w-full max-w-md bg-surface-container dark:bg-[#16121A] border-2 border-error rounded-xl p-6 card-frame text-center card-glow flex flex-col gap-6 shadow-[0_0_50px_rgba(239,68,68,0.3)]">
             <div className="flex items-center justify-center text-error">
               <span className="material-symbols-outlined text-[64px]" style={{ fontVariationSettings: "'FILL' 1" }}>
                 warning

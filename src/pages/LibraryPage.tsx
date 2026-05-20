@@ -9,6 +9,8 @@ interface LibraryPageProps {
   gems?: number
   ownedCards?: Record<string, number>
   onAddResources?: () => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
 export const LibraryPage: React.FC<LibraryPageProps> = ({ onNavigate, gold, gems, ownedCards = {}, onAddResources }) => {
@@ -310,7 +312,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({ onNavigate, gold, gems
                 return (
                   <article 
                     key={card.id}
-                    className={`bg-[#0F0F12] p-1 rounded-xl shadow-2xl group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2 h-[450px] ${isUnowned ? 'opacity-40 grayscale-[30%] brightness-75' : ''}`}
+                    className={`bg-background p-1 rounded-xl shadow-2xl group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2 h-[450px] ${isUnowned ? 'opacity-40 grayscale-[30%] brightness-75' : ''}`}
                   >
                     {/* Glow effect behind card */}
                     {!isUnowned && <div className={`absolute inset-0 opacity-0 transition-opacity duration-500 blur-xl rounded-xl ${getRarityGlow(card.rarity)}`}></div>}
@@ -319,14 +321,14 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({ onNavigate, gold, gems
                     {isUnowned && (
                       <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/60 backdrop-blur-[1px] pointer-events-none rounded-xl">
                         <span className="material-symbols-outlined text-tertiary text-4xl drop-shadow-[0_0_10px_rgba(233,195,73,0.8)] animate-pulse mb-2">lock</span>
-                        <span className="text-[10px] text-tertiary font-label-sm tracking-widest uppercase bg-[#16121A]/95 px-3 py-1 border border-tertiary/30 rounded-full">
+                        <span className="text-[10px] text-tertiary font-label-sm tracking-widest uppercase bg-surface-container dark:bg-[#16121A]/95 px-3 py-1 border border-tertiary/30 rounded-full">
                           Verrouillé
                         </span>
                       </div>
                     )}
 
                     {/* Quantity Badge */}
-                    <div className="absolute top-3 left-3 z-30 bg-[#16121A]/95 backdrop-blur border border-outline-variant/80 px-2.5 py-1 rounded text-[11px] font-bold font-label-sm shadow-xl flex items-center gap-1 select-none">
+                    <div className="absolute top-3 left-3 z-30 bg-surface-container dark:bg-[#16121A]/95 backdrop-blur border border-outline-variant/80 px-2.5 py-1 rounded text-[11px] font-bold font-label-sm shadow-xl flex items-center gap-1 select-none">
                       {isUnowned ? (
                         <span className="text-outline-variant uppercase text-[9px] tracking-wide">Bloqué</span>
                       ) : (
@@ -347,7 +349,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({ onNavigate, gold, gems
                           />
                         </div>
                         {/* Hover Overlay Button */}
-                        <div className="absolute inset-0 bg-[#0F0F12]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center rounded-lg z-20 gap-3">
+                        <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center rounded-lg z-20 gap-3">
                           <h4 className={`font-title-md text-title-md truncate px-4 ${getRarityTextColor(card.rarity)}`}>
                             {card.title}
                           </h4>
@@ -375,7 +377,7 @@ export const LibraryPage: React.FC<LibraryPageProps> = ({ onNavigate, gold, gems
                         </div>
 
                         {/* Text Area */}
-                        <div className="p-4 bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-[#16121A] flex-grow flex flex-col justify-between">
+                        <div className="p-4 bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] bg-surface-container dark:bg-[#16121A] flex-grow flex flex-col justify-between">
                           <div>
                             <h4 className={`font-title-md text-title-md mb-1 truncate ${getRarityTextColor(card.rarity)}`}>
                               {card.title}

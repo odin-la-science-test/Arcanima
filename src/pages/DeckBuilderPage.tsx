@@ -8,6 +8,8 @@ interface DeckBuilderPageProps {
   gems?: number
   ownedCards?: Record<string, number>
   onAddResources?: () => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
 export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({ 
@@ -107,11 +109,11 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
     : '0.0'
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0F0F12]">
+    <div className="min-h-screen flex flex-col bg-background">
       <div className="texture-overlay absolute inset-0 z-0 opacity-50"></div>
 
       <TopAppBar 
-        title="Aether Grimoire" 
+        title="ARCANIMA" 
         showEssence={true} 
         activePage="decks" 
         onNavigate={handleNavigation} 
@@ -123,13 +125,13 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
       <main className="flex-grow pt-16 flex flex-col h-[calc(100vh-64px)] pb-16 md:pb-0 overflow-hidden w-full max-w-container-max mx-auto relative z-10">
         
         {/* Top Half: Card Selection (Horizontal Scroll) */}
-        <section className="h-1/2 bg-[#0F0F12] border-b border-outline-variant/30 flex flex-col relative z-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-          <div className="px-4 py-3 flex justify-between items-center bg-[#16121A]/80 backdrop-blur-sm border-b border-outline-variant/20">
+        <section className="h-1/2 bg-background border-b border-outline-variant/30 flex flex-col relative z-20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+          <div className="px-4 py-3 flex justify-between items-center bg-surface-container dark:bg-[#16121A]/80 backdrop-blur-sm border-b border-outline-variant/20">
             <h2 className="font-title-md text-lg text-secondary-fixed flex items-center gap-2">
               <span className="material-symbols-outlined text-xl">auto_awesome_mosaic</span>
               Collection de combat
             </h2>
-            <div className="flex items-center gap-2 bg-[#1C1822] px-3 py-1.5 rounded-full border border-secondary-fixed/30 cursor-default select-none">
+            <div className="flex items-center gap-2 bg-surface-container-high dark:bg-[#1C1822] px-3 py-1.5 rounded-full border border-secondary-fixed/30 cursor-default select-none">
               <span className="material-symbols-outlined text-secondary-fixed-dim text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>filter_list</span>
               <span className="font-label-sm text-xs text-secondary-fixed-dim">Cartes disponibles ({collectionCards.length})</span>
             </div>
@@ -155,7 +157,7 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
                     className={`card-frame h-52 rounded-lg p-1 flex flex-col relative overflow-hidden transition-all duration-300 shadow-lg ${isUnowned ? 'border-outline-variant/40' : isMaxedOut ? 'border-outline-variant shadow-inner' : 'group-hover:shadow-[0_0_20px_rgba(78,222,163,0.3)] group-hover:border-secondary-fixed-dim'}`}
                   >
                     {/* Quantity Badge in Deck Builder */}
-                    <div className="absolute top-1.5 right-1.5 bg-[#16121A]/95 backdrop-blur border border-outline-variant/80 px-2 py-0.5 rounded text-[9px] font-bold font-label-sm shadow-md z-20 select-none">
+                    <div className="absolute top-1.5 right-1.5 bg-surface-container dark:bg-[#16121A]/95 backdrop-blur border border-outline-variant/80 px-2 py-0.5 rounded text-[9px] font-bold font-label-sm shadow-md z-20 select-none">
                       {isUnowned ? (
                         <span className="text-outline-variant">Locked</span>
                       ) : (
@@ -173,10 +175,10 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
                       </div>
                     ) : (
                       <>
-                        <div className="absolute top-1.5 left-1.5 bg-[#16121A] rounded-full w-6 h-6 flex items-center justify-center border border-secondary-fixed/50 z-10 text-xs font-bold text-secondary-fixed shadow-md">
+                        <div className="absolute top-1.5 left-1.5 bg-surface-container dark:bg-[#16121A] rounded-full w-6 h-6 flex items-center justify-center border border-secondary-fixed/50 z-10 text-xs font-bold text-secondary-fixed shadow-md">
                           {card.cost}
                         </div>
-                        <div className="h-[55%] w-full bg-[#1C1822] mb-1 overflow-hidden rounded-t">
+                        <div className="h-[55%] w-full bg-surface-container-high dark:bg-[#1C1822] mb-1 overflow-hidden rounded-t">
                           <img 
                             alt={card.title} 
                             className="w-full h-full object-cover opacity-90 group-hover:scale-115 transition-transform duration-500" 
@@ -202,7 +204,7 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
                     )}
                   </div>
                   {/* Add to deck overlay */}
-                  <div className="absolute inset-0 bg-[#0F0F12]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg backdrop-blur-[1px] z-30 pointer-events-none">
+                  <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg backdrop-blur-[1px] z-30 pointer-events-none">
                     {isUnowned ? (
                       <span className="material-symbols-outlined text-tertiary text-3xl drop-shadow-[0_0_10px_rgba(233,195,73,0.8)]">lock</span>
                     ) : isMaxedOut ? (
@@ -218,26 +220,26 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
         </section>
 
         {/* Bottom Half: Deck List & Stats */}
-        <section className="h-1/2 flex flex-col bg-[#16121A] overflow-hidden relative z-10">
-          <div className="px-4 py-3 border-b border-outline-variant/20 flex justify-between items-end bg-[#1C1822]">
+        <section className="h-1/2 flex flex-col bg-surface-container dark:bg-[#16121A] overflow-hidden relative z-10">
+          <div className="px-4 py-3 border-b border-outline-variant/20 flex justify-between items-end bg-surface-container-high dark:bg-[#1C1822]">
             <div>
               <h2 className="font-headline-lg-mobile text-xl text-primary drop-shadow-[0_0_10px_rgba(221,183,255,0.2)]">Deck Actuel</h2>
               <div className="flex items-center gap-2 mt-1">
-                <p className="font-label-sm text-xs text-outline bg-[#0F0F12] px-2 py-0.5 rounded border border-outline-variant/30">
+                <p className="font-label-sm text-xs text-outline bg-background px-2 py-0.5 rounded border border-outline-variant/30">
                   {totalCards}/40 Cartes
                 </p>
                 <span className="font-label-sm text-xs text-tertiary-fixed-dim">Moy. Coût : {avgCost}</span>
               </div>
             </div>
             {/* Mana Curve Graph */}
-            <div className="flex items-end gap-1 h-10 w-32 border-b border-l border-outline-variant/50 p-1 bg-[#0F0F12]/50 rounded-bl">
+            <div className="flex items-end gap-1 h-10 w-32 border-b border-l border-outline-variant/50 p-1 bg-background/50 rounded-bl">
               {[20, 50, 80, 100, 40, 10, 5].map((height, i) => (
                 <div 
                   key={i} 
                   className="w-full rounded-t-sm hover:bg-primary transition-colors cursor-help relative group" 
                   style={{ height: `${height}%`, backgroundColor: `rgba(221, 183, 255, ${0.3 + height/200})` }}
                 >
-                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#0F0F12] border border-outline-variant px-1.5 py-0.5 rounded text-[8px] text-on-surface opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-background border border-outline-variant px-1.5 py-0.5 rounded text-[8px] text-on-surface opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
                     {Math.round(height/10)}
                   </div>
                 </div>
@@ -255,10 +257,10 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
               deckCards.map((card) => (
                 <div 
                   key={card.id} 
-                  className="flex items-center justify-between bg-[#1C1822] rounded-lg border border-outline-variant/30 p-2 group hover:bg-[#25202B] hover:border-primary/30 transition-all cursor-pointer"
+                  className="flex items-center justify-between bg-surface-container-high dark:bg-[#1C1822] rounded-lg border border-outline-variant/30 p-2 group hover:bg-[#25202B] hover:border-primary/30 transition-all cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="bg-[#0F0F12] rounded-full w-8 h-8 flex items-center justify-center border border-primary/50 font-label-sm text-primary shadow-[inset_0_0_8px_rgba(168,85,247,0.2)]">
+                    <div className="bg-background rounded-full w-8 h-8 flex items-center justify-center border border-primary/50 font-label-sm text-primary shadow-[inset_0_0_8px_rgba(168,85,247,0.2)]">
                       {card.cost}
                     </div>
                     <div>
@@ -267,7 +269,7 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="text-tertiary-fixed-dim font-title-md text-sm bg-[#0F0F12] px-2 py-0.5 rounded border border-tertiary-fixed-dim/30">x{card.count}</span>
+                    <span className="text-tertiary-fixed-dim font-title-md text-sm bg-background px-2 py-0.5 rounded border border-tertiary-fixed-dim/30">x{card.count}</span>
                     <button 
                       onClick={() => removeCardFromDeck(card.id)}
                       className="material-symbols-outlined text-outline hover:text-error hover:scale-110 transition-all p-1"
@@ -281,7 +283,7 @@ export const DeckBuilderPage: React.FC<DeckBuilderPageProps> = ({
           </div>
           
           {/* Action Button */}
-          <div className="p-3 bg-[#1C1822] border-t border-outline-variant/30">
+          <div className="p-3 bg-surface-container-high dark:bg-[#1C1822] border-t border-outline-variant/30">
             <button 
               onClick={saveDeck}
               className="w-full py-3 bg-gradient-to-r from-primary-container to-inverse-primary text-on-primary-container font-title-md rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all flex justify-center items-center gap-2 font-bold"

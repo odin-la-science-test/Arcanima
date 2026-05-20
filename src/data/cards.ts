@@ -43,7 +43,7 @@ export const CARDS_DATABASE: CardData[] = [
     rarity: 'mythic',
     abilityTitle: 'Portail Aéthérique',
     abilityDescription: 'Invoque une créature aléatoire depuis votre deck directement sur le champ de bataille.',
-    lore: 'Une formule sacrée murmurée par les premiers tisseurs d\'Aether, capable d\'ouvrir des brèches vers des dimensions interdites.'
+    lore: 'Une formule sacrée murmurée par les premiers tisseurs d\'Arcanima, capable d\'ouvrir des brèches vers des dimensions interdites.'
   },
   {
     id: 'gorilla',
@@ -118,7 +118,7 @@ export const CARDS_DATABASE: CardData[] = [
     rarity: 'mythic',
     abilityTitle: 'Regard Pestilentiel',
     abilityDescription: 'Le joueur adverse doit défausser une carte au hasard à chaque fois que cette unité inflige des dégâts.',
-    lore: 'Une entité millénaire des profondeurs de l\'Aether, commandant aux légions de mouches et propageant la ruine.'
+    lore: 'Une entité millénaire des profondeurs de l\'Arcanima, commandant aux légions de mouches et propageant la ruine.'
   },
   {
     id: 'behemoth',
@@ -301,7 +301,7 @@ export const CARDS_DATABASE: CardData[] = [
     lore: 'Nourrie avec de la gelée royale aethérique, elle recèle un potentiel infini.'
   },
   {
-    id: 'myrmecoleon_aetheric',
+    id: 'myrmecoleon_Arcanimaic',
     title: 'Myrmécoleon Aéthérique',
     subtitle: 'Bête Mythique Souterraine',
     type: 'Créature - Bête Mythique',
@@ -403,7 +403,7 @@ export const CARDS_DATABASE: CardData[] = [
     rarity: 'mythic',
     abilityTitle: 'Justice de la Ruche',
     abilityDescription: 'Renvoie 30% des dégâts subis à l\'attaquant ennemi sous forme de dégâts de poison.',
-    lore: 'Un élu de l\'aether fusionné avec les phéromones de commandement, brillant d\'une lueur mystique.'
+    lore: 'Un élu de l\'Arcanima fusionné avec les phéromones de commandement, brillant d\'une lueur mystique.'
   },
   {
     id: 'myrmex_dieu',
@@ -661,8 +661,8 @@ export const CARDS_DATABASE: CardData[] = [
     lore: 'Une bête d\'un autre âge régnant sur les abysses aquatiques et les courants d\'énergie brute.'
   },
   {
-    id: 'faucon_aether',
-    title: "Faucon d'Aether",
+    id: 'faucon_Arcanima',
+    title: "Faucon d'Arcanima",
     subtitle: 'Chasseur Céleste',
     type: 'Créature - Avian',
     faction: 'Oiseau',
@@ -673,7 +673,7 @@ export const CARDS_DATABASE: CardData[] = [
     rarity: 'common',
     abilityTitle: 'Frappe Éclair',
     abilityDescription: 'Célérité. Inflige 5 dégâts supplémentaires lors du tour d\'invocation.',
-    lore: 'Surgissant des nuages d\'aether pour fondre sur ses proies.'
+    lore: 'Surgissant des nuages d\'Arcanima pour fondre sur ses proies.'
   },
   {
     id: 'chouette_sagesse',
@@ -752,7 +752,7 @@ export const CARDS_DATABASE: CardData[] = [
   },
   {
     id: 'requin_abyssal',
-    title: 'Requin de l\'Aether',
+    title: 'Requin de l\'Arcanima',
     subtitle: 'Prédateur Silencieux',
     type: 'Créature - Aquatique',
     faction: 'Poisson',

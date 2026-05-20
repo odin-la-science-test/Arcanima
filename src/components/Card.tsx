@@ -43,7 +43,7 @@ export const Card: React.FC<CardProps> = ({
       className="card-frame min-w-[280px] w-[280px] h-[400px] flex-shrink-0 snap-center relative group cursor-pointer"
     >
       {isCompleteVisual ? (
-        <div className="w-full h-full p-1 bg-[#0F0F12] rounded-lg relative overflow-hidden flex flex-col justify-between">
+        <div className="w-full h-full p-1 bg-background rounded-lg relative overflow-hidden flex flex-col justify-between">
           <div className="flex-grow w-full h-full overflow-hidden rounded">
             <img
               alt={title}
@@ -52,7 +52,7 @@ export const Card: React.FC<CardProps> = ({
             />
           </div>
           {/* Subtle glow layer */}
-          <div className="absolute inset-0 bg-[#0F0F12]/10 group-hover:bg-transparent transition-all pointer-events-none"></div>
+          <div className="absolute inset-0 bg-background/10 group-hover:bg-transparent transition-all pointer-events-none"></div>
         </div>
       ) : (
         <>
@@ -145,10 +145,10 @@ export const GridCard: React.FC<GridCardProps> = ({ title, type, image, cost, ra
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105"
               src={image}
             />
-            <div className="absolute top-2 left-2 w-8 h-8 bg-[#16121A] border border-primary/50 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+            <div className="absolute top-2 left-2 w-8 h-8 bg-surface-container dark:bg-[#16121A] border border-primary/50 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(168,85,247,0.3)]">
               <span className="font-headline-lg-mobile text-primary font-bold text-lg">{cost}</span>
             </div>
-            <div className="absolute top-2 right-2 w-6 h-6 bg-[#16121A] border border-tertiary-fixed-dim/50 rounded flex items-center justify-center rotate-45">
+            <div className="absolute top-2 right-2 w-6 h-6 bg-surface-container dark:bg-[#16121A] border border-tertiary-fixed-dim/50 rounded flex items-center justify-center rotate-45">
               <span className={`material-symbols-outlined ${rarityColors[rarity]} text-sm -rotate-45`} style={{ fontVariationSettings: "'FILL' 1" }}>
                 {rarityIcons[rarity]}
               </span>

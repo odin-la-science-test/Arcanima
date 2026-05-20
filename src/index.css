@@ -6,12 +6,82 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-background: #f4ece2;
+    --color-surface: #fdfaf6;
+    --color-surface-variant: #e9e2d5;
+    --color-surface-container: #fdfaf6;
+    --color-surface-container-low: #f5f0e6;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-high: #e3dccf;
+    --color-surface-container-highest: #dad3c5;
+    --color-on-background: #3c2f00;
+    --color-on-surface: #3c2f00;
+    --color-on-surface-variant: #574500;
+    --color-outline: #cba72f;
+    --color-outline-variant: #e9c349;
+    --color-primary: #842bd2;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #ddb7ff;
+    --color-on-primary-container: #2c0051;
+    --color-inverse-primary: #ddb7ff;
+    --color-secondary: #00a572;
+    --color-on-secondary: #ffffff;
+    --color-tertiary: #e9c349;
+    --color-on-tertiary: #3c2f00;
+    --color-tertiary-container: #ffe088;
+    --color-on-tertiary-container: #241a00;
+    --color-error: #93000a;
+    --color-on-error: #ffffff;
+  }
+
+  .dark {
+    --color-background: #0F0F12;
+    --color-surface: #131316;
+    --color-surface-variant: #353438;
+    --color-surface-container: #1f1f22;
+    --color-surface-container-low: #1b1b1e;
+    --color-surface-container-lowest: #0e0e11;
+    --color-surface-container-high: #2a2a2d;
+    --color-surface-container-highest: #353438;
+    --color-on-background: #e4e1e6;
+    --color-on-surface: #e4e1e6;
+    --color-on-surface-variant: #cfc2d6;
+    --color-outline: #988d9f;
+    --color-outline-variant: #4d4354;
+    --color-primary: #ddb7ff;
+    --color-on-primary: #490080;
+    --color-primary-container: #b76dff;
+    --color-on-primary-container: #400071;
+    --color-inverse-primary: #842bd2;
+    --color-secondary: #4edea3;
+    --color-on-secondary: #003824;
+    --color-tertiary: #e9c349;
+    --color-on-tertiary: #3c2f00;
+    --color-tertiary-container: #cba72f;
+    --color-on-tertiary-container: #4e3d00;
+    --color-error: #ffb4ab;
+    --color-on-error: #690005;
+  }
+
   body {
-    background-color: #0F0F12;
-    color: #e4e1e6;
-    background-image: radial-gradient(circle at 50% 0%, #16121A 0%, #0F0F12 70%);
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    background-image: none; /* Let components or App handle gradient if needed */
     background-attachment: fixed;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .dark body {
+    background-image: radial-gradient(circle at 50% 0%, #16121A 0%, #0F0F12 70%);
+  }
+
+  .theme-transitioning,
+  .theme-transitioning *,
+  .theme-transitioning *::before,
+  .theme-transitioning *::after {
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, color 0.5s ease-in-out, box-shadow 0.5s ease-in-out !important;
   }
 
   /* Custom Scrollbar */

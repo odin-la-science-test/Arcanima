@@ -201,20 +201,7 @@ export const useGameEngine = () => {
           return { ...prevOpp, board: newOppBoard, discard: newOppDiscard };
         });
 
-        // We can't use 'result' here because setOpponent is async; 
-        // instead we recalculate the attacker's new state
-        const defender_snapshot = opponent.board[targetSlot];
-        if (!defender_snapshot) return prevPlayer;
-        const atkNewHP = attacker.currentHealth - defender_snapshot.atk;
-        const newPlrBoard = [...prevPlayer.board];
-        const newPlrDiscard = [...prevPlayer.discard];
-        if (atkNewHP <= 0) {
-          newPlrBoard[attackerSlot] = null;
-          newPlrDiscard.push(attacker);
-        } else {
-          newPlrBoard[attackerSlot] = { ...attacker, currentHealth: atkNewHP, isEngaged: true };
-        }
-        return { ...prevPlayer, board: newPlrBoard, discard: newPlrDiscard };
+        return result;
       }
 
       return prevPlayer;
