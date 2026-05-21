@@ -1,5 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
 
+declare global {
+  interface ImportMeta {
+    env: Record<string, string | undefined>
+  }
+}
+
 export interface User {
   id: string | number
   username: string
@@ -20,7 +26,10 @@ let apiAvailable = true
 
 const testAPI = async () => {
   try {
-    const response = await fetch(`${API_URL}/health`, { timeout: 2000 })
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 2000)
+    const response = await fetch(`${API_URL}/health`, { signal: controller.signal })
+    clearTimeout(timeoutId)
     apiAvailable = response.ok
     return response.ok
   } catch (error) {
@@ -345,7 +354,7 @@ const updateUserDataLocal = (userId: string, key: string, value: any) => {
     }
   }
 
-  userData[key as keyof typeof userData] = value
+  userData = { ...userData, [key]: value }
   localStorage.setItem(userDataKey, JSON.stringify(userData))
 }
 
