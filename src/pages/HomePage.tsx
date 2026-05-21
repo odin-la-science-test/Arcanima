@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { TopAppBar, BottomNavBar } from '../components/Navigation'
 import { Footer } from '../components/Footer'
+import { useIsMobile } from '../hooks/useIsMobile'
+import { MobileLayout } from '../components/MobileLayout'
 
 interface HomePageProps {
   onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play', cardId?: string) => void
@@ -13,10 +15,16 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate, gold, gems, onAddResources, theme, onToggleTheme }) => {
   const [activeNav, setActiveNav] = useState<'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play'>('home')
+  const isMobile = useIsMobile()
 
   const handleNavigation = (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => {
     setActiveNav(page as 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play')
     onNavigate(page)
+  }
+
+  // Afficher le design mobile si détecté sur téléphone
+  if (isMobile) {
+    return <MobileLayout htmlPath="/mobile-designs/accueil_mobile/code.html" />
   }
 
   return (

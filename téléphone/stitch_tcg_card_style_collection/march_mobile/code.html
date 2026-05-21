@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Grimoire - Market</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Manrope:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#cfc2d6",
+                    "on-primary-fixed-variant": "#6900b3",
+                    "surface-container-high": "#2a2a2d",
+                    "secondary": "#4edea3",
+                    "error-container": "#93000a",
+                    "on-secondary": "#003824",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary-container": "#cba72f",
+                    "on-surface": "#e4e1e6",
+                    "tertiary-fixed": "#ffe088",
+                    "secondary-fixed": "#6ffbbe",
+                    "inverse-surface": "#e4e1e6",
+                    "surface-container-low": "#1b1b1e",
+                    "secondary-container": "#00a572",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "surface": "#131316",
+                    "error": "#ffb4ab",
+                    "surface-tint": "#ddb7ff",
+                    "on-tertiary": "#3c2f00",
+                    "inverse-on-surface": "#303033",
+                    "on-secondary-container": "#00311f",
+                    "inverse-primary": "#842bd2",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-primary": "#490080",
+                    "on-background": "#e4e1e6",
+                    "surface-container-highest": "#353438",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "primary-fixed-dim": "#ddb7ff",
+                    "background": "#131316",
+                    "surface-container-lowest": "#0e0e11",
+                    "surface-bright": "#39393c",
+                    "primary": "#ddb7ff",
+                    "surface-variant": "#353438",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#131316",
+                    "outline": "#988d9f",
+                    "on-tertiary-container": "#4e3d00",
+                    "on-primary-fixed": "#2c0051",
+                    "surface-container": "#1f1f22",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#002113",
+                    "primary-fixed": "#f0dbff",
+                    "primary-container": "#b76dff",
+                    "outline-variant": "#4d4354",
+                    "secondary-fixed-dim": "#4edea3",
+                    "tertiary": "#e9c349",
+                    "on-primary-container": "#400071"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "unit": "4px",
+                    "container-max": "1440px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Playfair Display"],
+                    "title-md": ["Playfair Display"],
+                    "body-md": ["Manrope"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["Manrope"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ritual-glow {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+        .mana-pulse:active {
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            transform: scale(0.95);
+            transition: all 0.15s ease-in-out;
+        }
+        .octagonal {
+            clip-path: polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1f1f22;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e9c349;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary/30 min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant bg-surface-container/90 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.2)] flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-primary/30 overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A cinematic portrait of a mysterious cloaked mystic with glowing purple eyes and intricate gold facial markings. The background is a dark, swirling obsidian void with faint crystalline particles. The style is a high-fantasy digital painting with dramatic chiaroscuro lighting and a rich palette of deep violets and burnished gold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIPt-TxA2ngraQWJl9o6Tn3SxpQSGrF8TJTQnHSHEiWITzFPW87qFFhkx5DyEOG9rMoHBniUHXiuobd-GWarvDcHE-C6mmCDKwfVW9pLGSPQ2sBg5e6BdNOMjcQE8agQBjxDLjpYgubsz_p8ICygeFKDdEXja7vzArh46K-L9TTAnme69SloweNFPVS2rhCaWyHevNVTLs3gmWQ14usWYzSNP5QAtNZXOPUK5LpdnDPxGBARprfB-ZGgbJOyLAAfP6y3VA9Sh8gu4"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-surface-tint tracking-tighter">Aether Grimoire</h1>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span class="font-label-sm text-label-sm">1,250 Essence</span>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[18px]">diamond</span>
+<span class="font-label-sm text-label-sm">42 Gems</span>
+</div>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile space-y-8">
+<!-- Hero Banner: Les Profondeurs d'Hadès -->
+<section class="relative h-48 rounded-xl overflow-hidden border border-outline-variant ritual-glow">
+<img alt="Expansion Banner" class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="An epic dark fantasy landscape depicting the entrance to a subterranean underworld cavern known as Les Profondeurs d'Hadès. Massive obsidian pillars are etched with glowing purple runes, and a river of golden molten ether flows between them. The lighting is moody and atmospheric, dominated by deep shadows and vibrant violet luminescence in a ritualistic dark-fantasy art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMhLn3OHh1PmUrxbWA2VFaeATzXrX4QJROjtSEhykCgIBJoDBpxk3qfip7S9viXJcSDGLwQA9O5drN5yKf7xhPJyGyqP63jkkmRNrMTbPTF4NbYLWjwsCY9CbBHFHxZ6ZoPrZg8GGhUe134Y_uwydvbV9oKueNUX-F2kyRt5ur6BKIPJ_5bYIHl3DH_QO3gibdWxhZS3CLiN7MgM7TKYcXu1qHwbj8AZTOB2WAtlRHRCDnIaYAGkeZkH7PpWSt70BYtWxQyre18U4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-4 w-full">
+<span class="font-label-sm text-label-sm text-secondary border border-secondary/40 px-2 py-1 rounded bg-background/60 backdrop-blur-sm mb-2 inline-block uppercase tracking-widest">New Extension</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-white leading-none">Les Profondeurs d'Hadès</h2>
+<p class="text-on-surface-variant text-sm mt-1">Conquer the abyss. Claim the soul-relics.</p>
+</div>
+</section>
+<!-- Categories: Horizontal Scroll -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-title-md text-title-md text-primary">Sacred Collections</h3>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 custom-scrollbar no-scrollbar">
+<!-- Booster Packs -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="h-40 rounded-lg bg-surface-container border border-outline-variant flex flex-col items-center justify-center gap-2 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-on-surface text-center">Booster Packs</span>
+</div>
+</div>
+<!-- Single Cards -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="h-40 rounded-lg bg-surface-container border border-outline-variant flex flex-col items-center justify-center gap-2 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">style</span>
+<span class="font-label-sm text-label-sm text-on-surface text-center">Single Cards</span>
+</div>
+</div>
+<!-- Accessories -->
+<div class="flex-shrink-0 w-32 group cursor-pointer">
+<div class="h-40 rounded-lg bg-surface-container border border-outline-variant flex flex-col items-center justify-center gap-2 group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">token</span>
+<span class="font-label-sm text-label-sm text-on-surface text-center">Accessories</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Special Offers: Bento Grid Style -->
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-primary">Limited Manifestations</h3>
+<span class="font-label-sm text-label-sm text-outline">Refreshes in 4h 12m</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Large Feature Item -->
+<div class="col-span-2 relative h-56 rounded-xl border border-tertiary/30 bg-surface-container-high overflow-hidden group">
+<img alt="Relic" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="A highly detailed close-up of an ancient, ornate gold and obsidian chalice floating in a dark chamber. Wisps of purple smoke emerge from the vessel, and its surface is covered in glowing violet runes. The lighting is dramatic and centralized, emphasizing the metallic textures and the dark fantasy ritualistic atmosphere of the Aether Grimoire world." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4nxhEYS77D8LWTxjLNBL4kd9UFiMH276noqc5A4UsohMY0IfNZlKPQrOcpgIfvEhkFqm-sf7h-1Lq-qsgqExFcbUX_zvWBEXOYGYSNkx6YU1lV9h_llotWO6yU4tHY8M_oWPtQ6ZDXOWH18yYgwhmHfeEHcN9eqd4XLAYNjKZZ-J-HcQCnhPDslGr8BKFI-cmaq4yfiDYGEGbSIi364sX_GVY0jZ7SmPaDWWA9SRMk8ExsElgtxzM0Fxwm_Yo-afNI0zLhAfFyx4"/>
+<div class="absolute inset-0 p-4 flex flex-col justify-end bg-gradient-to-t from-surface-container-lowest to-transparent">
+<div class="flex justify-between items-end">
+<div>
+<span class="font-label-sm text-label-sm text-tertiary">DAILY RELIC</span>
+<h4 class="font-title-md text-title-md text-white">Chalice of Whispers</h4>
+</div>
+<button class="octagonal bg-tertiary-container text-on-tertiary-container px-4 py-2 font-label-sm text-label-sm mana-pulse">
+                                400 Essence
+                            </button>
+</div>
+</div>
+</div>
+<!-- Small Items -->
+<div class="aspect-square rounded-xl border border-outline-variant bg-surface-container-low p-3 flex flex-col justify-between ritual-glow">
+<div class="w-full h-24 rounded-lg bg-surface-container overflow-hidden relative border border-outline-variant">
+<img alt="Item" class="w-full h-full object-cover opacity-80" data-alt="A cluster of glowing purple crystal shards arranged like a precious jewelry display on a dark velvet background. The lighting is cool and ethereal, casting soft purple shadows. Every facet of the crystals reflects a digital dark fantasy aesthetic with golden sparks floating in the air." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvnf2XaZRZTVAkVuOiAMvJycYeNFDZzovrg5tgN_KWX3QFmfIfPb7pZUAPTNj026zPueSc_M_LH6S1ESnRYe69TUzgwnnd0_QcwPB2K-u8VFUAZtsJ3xibTwxuW6qDkECbeecTdkBHEBthjBmvaMoUq7ib8K4FLZe0Q65Jp3Rxeftez3ocMF40QKVpGagmTDXCI93hXAwPx1PyzQEMb1kEaXpL0t5SvhAfOvFgNWM9j74ESPfgZ8yo2a3pHkGMKk3SI51vd3P449A"/>
+</div>
+<div class="mt-2">
+<h5 class="font-label-sm text-label-sm text-on-surface truncate">Ethereal Shards</h5>
+<div class="flex items-center gap-1 text-secondary mt-1">
+<span class="material-symbols-outlined text-[14px]">diamond</span>
+<span class="font-label-sm text-label-sm">12</span>
+</div>
+</div>
+</div>
+<div class="aspect-square rounded-xl border border-outline-variant bg-surface-container-low p-3 flex flex-col justify-between">
+<div class="w-full h-24 rounded-lg bg-surface-container overflow-hidden relative border border-outline-variant">
+<img alt="Item" class="w-full h-full object-cover opacity-80" data-alt="An intricately designed card sleeve featuring a gold filigree phoenix rising from purple flames against a black obsidian background. The material looks like premium matte leather with metallic gold foil stamping. The scene is presented in a studio setting with cinematic dark fantasy lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBObN6H-E6SA85vcO_jXbDnyVaJSy7I3GbV8QD-CS9-sfVptuktNg1nRlo-efonPIRT5knqlWQfq0LZG39wT4Vc9l81gJgn4iMcwnbQY_5FXWejZXdFPey8OVfZ0gbzHk8_Qmx-7_ESXwwXU2exNYU37D1FDkCygDXwA5arywpMlY0zzS5SmZ5InQzD42zvADg5mzbSMS6GC64pcgb9jzVZI3tAteWtckATrhkoatT1jMXi5EVEufY9vFGsqemvQgFp1j-7kPFatNc"/>
+</div>
+<div class="mt-2">
+<h5 class="font-label-sm text-label-sm text-on-surface truncate">Void Sleeves</h5>
+<div class="flex items-center gap-1 text-tertiary mt-1">
+<span class="material-symbols-outlined text-[14px]">payments</span>
+<span class="font-label-sm text-label-sm">800</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Deals List -->
+<section class="space-y-4">
+<h3 class="font-title-md text-title-md text-primary">Ancient Scroll Bundles</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container border border-outline-variant hover:border-primary/50 transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">auto_stories</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface">Initiate's Scroll Bundle</p>
+<p class="text-xs text-outline">5 Packs + 1 Rare Card</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-secondary font-label-sm text-label-sm">15 Gems</span>
+<span class="text-[10px] text-error line-through">20 Gems</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 rounded-xl bg-surface-container border border-outline-variant hover:border-primary/50 transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">auto_fix_high</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface">Grand Arcanist's Chest</p>
+<p class="text-xs text-outline">20 Packs + Special Avatar</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-secondary font-label-sm text-label-sm">50 Gems</span>
+<span class="text-[10px] text-error line-through">75 Gems</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 border-t border-outline-variant bg-surface-container-highest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.5)] rounded-t-full">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<!-- Library -->
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+<span class="font-label-sm text-label-sm">Library</span>
+</a>
+<!-- Decks -->
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="style">style</span>
+<span class="font-label-sm text-label-sm">Decks</span>
+</a>
+<!-- Market (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 animate-pulse" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-sm text-label-sm">Market</span>
+</a>
+</nav>
+<script>
+        // Simple atmospheric interaction: Glow pulse on click
+        document.addEventListener('mousedown', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'fixed rounded-full pointer-events-none z-[100] bg-primary/20 blur-xl transition-all duration-500 ease-out';
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY}px`;
+            ripple.style.width = '0px';
+            ripple.style.height = '0px';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(ripple);
+            
+            requestAnimationFrame(() => {
+                ripple.style.width = '200px';
+                ripple.style.height = '200px';
+                ripple.style.opacity = '0';
+            });
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    </script>
+</body></html>

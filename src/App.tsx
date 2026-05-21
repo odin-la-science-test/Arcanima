@@ -5,8 +5,12 @@ import DeckBuilderPage from './pages/DeckBuilderPage'
 import CardDetailPage from './pages/CardDetailPage'
 import MarketPage from './pages/MarketPage'
 import ProfilePage from './pages/ProfilePage'
+import { LoginPage } from './pages/LoginPage'
 import { CARDS_DATABASE } from './data/cards'
 import GamePage from './pages/GamePage'
+import { useAuth } from './hooks/useAuth'
+import { AuthWrapper } from './components/AuthWrapper'
+import { useTheme } from './contexts/ThemeContext'
 
 type Page = 'home' | 'library' | 'decks' | 'market' | 'card-detail' | 'profile' | 'play'
 
@@ -31,68 +35,35 @@ const getInitialOwnedCards = () => {
 }
 
 function App() {
+  const auth = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const [navigation, setNavigation] = useState<NavigationState>({ current: 'home' })
 
-  // Global persistent states
-  const [gold, setGold] = useState<number>(() => {
-    const saved = localStorage.getItem('arcanima_gold')
-    return saved ? Number(saved) : INITIAL_GOLD
-  })
+  // User-specific persistent states (loaded from auth)
+  const [gold, setGold] = useState<number>(0)
+  const [gems, setGems] = useState<number>(0)
+  const [ownedCards, setOwnedCards] = useState<Record<string, number>>({})
+  const [pseudonym, setPseudonym] = useState<string>('')
+  const [packsOpened, setPacksOpened] = useState<number>(0)
+  const [level, setLevel] = useState<number>(1)
 
-  const [gems, setGems] = useState<number>(() => {
-    const saved = localStorage.getItem('arcanima_gems')
-    return saved ? Number(saved) : INITIAL_GEMS
-  })
-
-  const [ownedCards, setOwnedCards] = useState<Record<string, number>>(() => {
-    const saved = localStorage.getItem('arcanima_owned_cards')
-    if (saved) {
-      try {
-        return JSON.parse(saved)
-      } catch (e) {
-        console.error("Error parsing owned cards from localStorage, resetting", e)
-      }
-    }
-    return getInitialOwnedCards()
-  })
-
-  const [pseudonym, setPseudonym] = useState<string>(() => {
-    return localStorage.getItem('arcanima_pseudonym') || "Archimède l'Éveillé"
-  })
-
-  const [packsOpened, setPacksOpened] = useState<number>(() => {
-    const saved = localStorage.getItem('arcanima_packs_opened')
-    return saved ? Number(saved) : 0
-  })
-
-  // Global Theme State
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const saved = localStorage.getItem('arcanima_theme')
-    return (saved as 'light' | 'dark') || 'dark'
-  })
-
-  const toggleTheme = () => {
-    document.documentElement.classList.add('theme-transitioning')
-    
-    setTheme(prev => {
-      const next = prev === 'dark' ? 'light' : 'dark'
-      localStorage.setItem('arcanima_theme', next)
-      return next
-    })
-
-    setTimeout(() => {
-      document.documentElement.classList.remove('theme-transitioning')
-    }, 500)
-  }
-
-  // Sync theme to document body/html so Tailwind darkMode: 'class' triggers globally
+  // Load user data when user logs in
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
+    if (auth.user && auth.getAllUserData) {
+      const loadUserData = async () => {
+        const userData = await auth.getAllUserData()
+        if (userData) {
+          setGold(userData.gold || 0)
+          setGems(userData.gems || 0)
+          setOwnedCards(userData.ownedCards || {})
+          setPseudonym(userData.pseudonym || '')
+          setPacksOpened(userData.packsOpened || 0)
+          setLevel(userData.level || 1)
+        }
+      }
+      loadUserData()
     }
-  }, [theme])
+  }, [auth.user, auth.getAllUserData])
 
   // Global Audio State
   const [musicEnabled, setMusicEnabled] = useState<boolean>(() => {
@@ -120,11 +91,13 @@ function App() {
     }
   }, [musicEnabled])
 
-  // State synchronization with localStorage
+  // State synchronization with user's localStorage
   const updateGold = (value: number | ((prev: number) => number)) => {
     setGold(prev => {
       const next = typeof value === 'function' ? value(prev) : value
-      localStorage.setItem('arcanima_gold', String(next))
+      if (auth.user) {
+        auth.updateUserData('gold', next)
+      }
       return next
     })
   }
@@ -132,7 +105,9 @@ function App() {
   const updateGems = (value: number | ((prev: number) => number)) => {
     setGems(prev => {
       const next = typeof value === 'function' ? value(prev) : value
-      localStorage.setItem('arcanima_gems', String(next))
+      if (auth.user) {
+        auth.updateUserData('gems', next)
+      }
       return next
     })
   }
@@ -140,7 +115,9 @@ function App() {
   const updateOwnedCards = (value: Record<string, number> | ((prev: Record<string, number>) => Record<string, number>)) => {
     setOwnedCards(prev => {
       const next = typeof value === 'function' ? value(prev) : value
-      localStorage.setItem('arcanima_owned_cards', JSON.stringify(next))
+      if (auth.user) {
+        auth.updateUserData('ownedCards', next)
+      }
       return next
     })
   }
@@ -186,7 +163,9 @@ function App() {
     if (cardIds.length === 5) {
       setPacksOpened(prev => {
         const next = prev + 1
-        localStorage.setItem('arcanima_packs_opened', String(next))
+        if (auth.user) {
+          auth.updateUserData('packsOpened', next)
+        }
         return next
       })
     }
@@ -194,20 +173,29 @@ function App() {
 
   const updatePseudonym = (name: string) => {
     setPseudonym(name)
-    localStorage.setItem('arcanima_pseudonym', name)
+    if (auth.user) {
+      auth.updateUserData('pseudonym', name)
+    }
   }
 
   const handleResetAll = () => {
-    localStorage.removeItem('arcanima_gold')
-    localStorage.removeItem('arcanima_gems')
-    localStorage.removeItem('arcanima_owned_cards')
-    localStorage.removeItem('arcanima_pseudonym')
-    localStorage.removeItem('arcanima_packs_opened')
-    setGold(INITIAL_GOLD)
-    setGems(INITIAL_GEMS)
-    setOwnedCards(getInitialOwnedCards())
-    setPseudonym("Archimède l'Éveillé")
+    // Reset user data to initial values (0 resources, no cards, level 1)
+    setGold(0)
+    setGems(0)
+    setOwnedCards({})
+    setPseudonym('')
     setPacksOpened(0)
+    setLevel(1)
+    
+    // Save reset to user data
+    if (auth.user) {
+      auth.updateUserData('gold', 0)
+      auth.updateUserData('gems', 0)
+      auth.updateUserData('ownedCards', {})
+      auth.updateUserData('pseudonym', '')
+      auth.updateUserData('packsOpened', 0)
+      auth.updateUserData('level', 1)
+    }
     navigateTo('home')
   }
 
@@ -219,16 +207,27 @@ function App() {
     window.scrollTo(0, 0)
   }
 
-  return (
-    <div className={`min-h-screen bg-background text-on-background ${theme === 'dark' ? 'dark' : ''}`}>
-      {/* Global Ambient Audio */}
-      <audio 
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
-        loop 
-        ref={audioRef}
-      />
+  const handleUserLogout = () => {
+    // Reset local state on logout
+    setGold(0)
+    setGems(0)
+    setOwnedCards({})
+    setPseudonym('')
+    setPacksOpened(0)
+    setLevel(1)
+  }
 
-      {navigation.current === 'home' && (
+  return (
+    <AuthWrapper onUserLogout={handleUserLogout}>
+      <div className={`min-h-screen bg-background text-on-background ${theme === 'dark' ? 'dark' : ''}`}>
+        {/* Global Ambient Audio */}
+        <audio 
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+          loop 
+          ref={audioRef}
+        />
+
+        {navigation.current === 'home' && (
         <HomePage 
           onNavigate={navigateTo} 
           gold={gold} 
@@ -303,9 +302,12 @@ function App() {
       {navigation.current === 'play' && (
         <GamePage 
           onNavigate={navigateTo} 
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
       )}
-    </div>
+      </div>
+    </AuthWrapper>
   )
 }
 

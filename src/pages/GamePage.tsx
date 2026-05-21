@@ -2,18 +2,26 @@ import React, { useState } from 'react'
 import { TopAppBar } from '../components/Navigation'
 import GameBoard from '../components/game/GameBoard'
 import { useGameEngine } from '../hooks/useGameEngine'
+import { useTheme } from '../contexts/ThemeContext'
 import { CARDS_DATABASE } from '../data/cards'
 import { STARTER_DECK, STARTER_DECK_NAME, STARTER_DECK_DESCRIPTION } from '../data/starterDeck'
 
 interface GamePageProps {
   onNavigate: (page: 'home' | 'library' | 'decks' | 'market' | 'profile' | 'play') => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
 type GameScreen = 'lobby' | 'playing'
 
-const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
+const GamePage: React.FC<GamePageProps> = ({ onNavigate, theme, onToggleTheme }) => {
   const [screen, setScreen] = useState<GameScreen>('lobby')
   const [selectedDeckType, setSelectedDeckType] = useState<'saved' | 'starter'>('starter')
+  const { theme: contextTheme, toggleTheme: contextToggleTheme } = useTheme()
+
+  // Use context theme and toggleTheme if not provided via props
+  const finalTheme = theme || contextTheme
+  const finalToggleTheme = onToggleTheme || contextToggleTheme
 
   const engine = useGameEngine()
 
@@ -50,15 +58,17 @@ const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
 
   if (screen === 'playing') {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] text-on-background dark pb-20 md:pb-0 pt-16 flex flex-col">
+      <div className="min-h-screen bg-background text-on-background pb-20 md:pb-0 pt-16 flex flex-col">
         <TopAppBar
           title="Arcanima Battle"
           activePage="play"
           onNavigate={onNavigate}
           showEssence={false}
+          theme={finalTheme}
+          onToggleTheme={finalToggleTheme}
         />
         <main className="flex-grow flex flex-col items-center justify-center p-4">
-          <div className="w-full max-w-[1400px] h-full min-h-[80vh] bg-[#111] border border-outline/20 rounded-xl overflow-hidden shadow-2xl relative">
+          <div className="w-full max-w-[1400px] h-full min-h-[80vh] bg-surface-container border border-outline/20 rounded-xl overflow-hidden shadow-2xl relative">
             {!engine.isInitialized ? (
               <div className="flex flex-col items-center justify-center h-full gap-4 text-primary">
                 <span className="material-symbols-outlined text-5xl animate-spin">auto_awesome</span>
@@ -75,12 +85,14 @@ const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
 
   // Lobby Screen
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-on-background dark pb-20 md:pb-0 pt-16 flex flex-col">
+    <div className="min-h-screen bg-background text-on-background pb-20 md:pb-0 pt-16 flex flex-col">
       <TopAppBar
         title="Arcanima Battle"
         activePage="play"
         onNavigate={onNavigate}
         showEssence={false}
+        theme={finalTheme}
+        onToggleTheme={finalToggleTheme}
       />
 
       <main className="flex-grow flex flex-col items-center justify-start p-4 pt-8 gap-6">
@@ -108,7 +120,7 @@ const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
           >
             {selectedDeckType === 'starter' && (
               <div className="absolute top-3 right-3 w-6 h-6 bg-secondary rounded-full flex items-center justify-center">
-                <span className="material-symbols-outlined text-black text-sm">check</span>
+                <span className="material-symbols-outlined text-on-secondary text-sm">check</span>
               </div>
             )}
             <div className="flex items-center gap-3 mb-3">
@@ -122,13 +134,13 @@ const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
             </div>
             <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">{STARTER_DECK_DESCRIPTION}</p>
             <div className="flex gap-3 text-xs">
-              <div className="bg-black/40 px-2 py-1 rounded border border-secondary/20 text-secondary">
+              <div className="bg-surface-variant px-2 py-1 rounded border border-secondary/20 text-secondary">
                 <span className="font-bold">{starterTotal}</span> cartes
               </div>
-              <div className="bg-black/40 px-2 py-1 rounded border border-tertiary/20 text-tertiary">
+              <div className="bg-surface-variant px-2 py-1 rounded border border-tertiary/20 text-tertiary">
                 Moy. <span className="font-bold">{starterAvgCost}</span> énergie
               </div>
-              <div className="bg-black/40 px-2 py-1 rounded border border-primary/20 text-primary">
+              <div className="bg-surface-variant px-2 py-1 rounded border border-primary/20 text-primary">
                 Équilibré
               </div>
             </div>
@@ -148,7 +160,7 @@ const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
           >
             {selectedDeckType === 'saved' && savedDeck && (
               <div className="absolute top-3 right-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
-                <span className="material-symbols-outlined text-black text-sm">check</span>
+                <span className="material-symbols-outlined text-on-primary text-sm">check</span>
               </div>
             )}
             <div className="flex items-center gap-3 mb-3">
@@ -166,10 +178,10 @@ const GamePage: React.FC<GamePageProps> = ({ onNavigate }) => {
                   Votre deck personnalisé, construit dans le Deck Builder.
                 </p>
                 <div className="flex gap-3 text-xs">
-                  <div className="bg-black/40 px-2 py-1 rounded border border-primary/20 text-primary">
+                  <div className="bg-surface-variant px-2 py-1 rounded border border-primary/20 text-primary">
                     <span className="font-bold">{savedDeck.total}</span> cartes
                   </div>
-                  <div className="bg-black/40 px-2 py-1 rounded border border-tertiary/20 text-tertiary">
+                  <div className="bg-surface-variant px-2 py-1 rounded border border-tertiary/20 text-tertiary">
                     Personnalisé
                   </div>
                 </div>

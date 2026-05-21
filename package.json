@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:backend": "cd backend && npm run dev",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend:install": "cd backend && npm install"
   },
   "dependencies": {
     "@tailwindcss/container-queries": "^0.1.1",

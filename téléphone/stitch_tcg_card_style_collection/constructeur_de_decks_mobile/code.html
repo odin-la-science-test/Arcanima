@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Grimoire | Deck Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .rune-chip {
+            clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+        }
+        .mana-bar-gradient {
+            background: linear-gradient(to top, var(--tw-gradient-from), var(--tw-gradient-to));
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1b1b1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e9c349;
+            border-radius: 10px;
+        }
+        .card-frame {
+            box-shadow: inset 0 0 10px rgba(168, 85, 247, 0.2);
+        }
+        .modal-manifest {
+            animation: manifest 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes manifest {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#cfc2d6",
+                      "on-primary-fixed-variant": "#6900b3",
+                      "surface-container-high": "#2a2a2d",
+                      "secondary": "#4edea3",
+                      "error-container": "#93000a",
+                      "on-secondary": "#003824",
+                      "on-secondary-fixed-variant": "#005236",
+                      "tertiary-container": "#cba72f",
+                      "on-surface": "#e4e1e6",
+                      "tertiary-fixed": "#ffe088",
+                      "secondary-fixed": "#6ffbbe",
+                      "inverse-surface": "#e4e1e6",
+                      "surface-container-low": "#1b1b1e",
+                      "secondary-container": "#00a572",
+                      "tertiary-fixed-dim": "#e9c349",
+                      "surface": "#131316",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#ddb7ff",
+                      "on-tertiary": "#3c2f00",
+                      "inverse-on-surface": "#303033",
+                      "on-secondary-container": "#00311f",
+                      "inverse-primary": "#842bd2",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-primary": "#490080",
+                      "on-background": "#e4e1e6",
+                      "surface-container-highest": "#353438",
+                      "on-tertiary-fixed-variant": "#574500",
+                      "primary-fixed-dim": "#ddb7ff",
+                      "background": "#131316",
+                      "surface-container-lowest": "#0e0e11",
+                      "surface-bright": "#39393c",
+                      "primary": "#ddb7ff",
+                      "surface-variant": "#353438",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#131316",
+                      "outline": "#988d9f",
+                      "on-tertiary-container": "#4e3d00",
+                      "on-primary-fixed": "#2c0051",
+                      "surface-container": "#1f1f22",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#002113",
+                      "primary-fixed": "#f0dbff",
+                      "primary-container": "#b76dff",
+                      "outline-variant": "#4d4354",
+                      "secondary-fixed-dim": "#4edea3",
+                      "tertiary": "#e9c349",
+                      "on-primary-container": "#400071"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "64px",
+                      "unit": "4px",
+                      "container-max": "1440px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Playfair Display"],
+                      "title-md": ["Playfair Display"],
+                      "body-md": ["Manrope"],
+                      "headline-lg-mobile": ["Playfair Display"],
+                      "display-lg": ["Playfair Display"],
+                      "body-lg": ["Manrope"],
+                      "label-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant bg-surface-container/90 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.2)] flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-primary/30 overflow-hidden shadow-inner">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A detailed digital portrait of a hooded mystical figure in dark fantasy attire, silver embroidery on black fabric, glowing purple eyes, set against an atmospheric dark stone background with floating magical embers. The lighting is low-key with intense primary purple highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzOXYqFETivXdNLqftrjc3SDkJmXPjHFOSM6oTx_qydNNt33LuDJKr942HhdxzJx1NHQqxSJorwcOhZElfAqZNSSoISaeE-Y2zJ1pn5SrAWdr-f5AuNsZXskwKzPGp5bwwhq535OIqRbCKrUSfeSZV1wQ_TZRVFbS4NaBS-AzD20E_YsDCZ5FVbM9NavNyOy3FBB2WQ5N9HIQsQ30ulo7BXAfIK1fjafYfQwKjnu-s-cl1wz26qdojQfBU3KmelleADQ7XcO-UCNs"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-surface-tint tracking-tighter">Aether Grimoire</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-primary">1,250 Essence</span>
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-16 pb-24 h-screen overflow-y-auto bg-[radial-gradient(circle_at_50%_50%,_#16121A_0%,_#131316_100%)]">
+<!-- Stats & Mana Curve Section -->
+<section class="px-margin-mobile mt-6">
+<div class="bg-surface-container-high/40 rounded-xl p-4 border border-outline-variant/30 backdrop-blur-sm">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-1">Deck Integrity</p>
+<div class="flex items-center gap-2">
+<span class="font-display-lg text-headline-lg text-primary">24<span class="text-on-surface-variant font-title-md">/40</span></span>
+<div class="flex items-center bg-error-container/20 px-2 py-0.5 rounded border border-error/30">
+<span class="material-symbols-outlined text-error text-[16px] mr-1" data-icon="warning">warning</span>
+<span class="font-label-sm text-label-sm text-error">Invalid</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex gap-1.5 h-12 items-end">
+<div class="w-3 bg-primary-container/20 rounded-t-sm h-1/4"></div>
+<div class="w-3 bg-primary-container/60 rounded-t-sm h-3/4 shadow-[0_0_10px_rgba(183,109,255,0.4)]"></div>
+<div class="w-3 bg-primary-container/80 rounded-t-sm h-full shadow-[0_0_10px_rgba(183,109,255,0.6)]"></div>
+<div class="w-3 bg-primary-container/50 rounded-t-sm h-1/2 shadow-[0_0_10px_rgba(183,109,255,0.3)]"></div>
+<div class="w-3 bg-primary-container/30 rounded-t-sm h-1/3"></div>
+<div class="w-3 bg-primary-container/10 rounded-t-sm h-1/6"></div>
+</div>
+<p class="font-label-sm text-label-sm text-outline-variant mt-1">Mana Curve</p>
+</div>
+</div>
+<!-- Quick Filter Runes -->
+<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+<button class="rune-chip bg-primary/10 border border-primary/50 text-primary px-4 py-1 font-label-sm text-label-sm whitespace-nowrap">All Spells</button>
+<button class="rune-chip border border-outline-variant text-on-surface-variant px-4 py-1 font-label-sm text-label-sm whitespace-nowrap">Creatures</button>
+<button class="rune-chip border border-outline-variant text-on-surface-variant px-4 py-1 font-label-sm text-label-sm whitespace-nowrap">Artifacts</button>
+<button class="rune-chip border border-outline-variant text-on-surface-variant px-4 py-1 font-label-sm text-label-sm whitespace-nowrap">Eldritch</button>
+</div>
+</div>
+</section>
+<!-- Card Collection Bento Grid -->
+<section class="px-margin-mobile mt-6 grid grid-cols-2 gap-4 pb-40">
+<!-- Card 1 -->
+<div class="relative group" onclick="this.classList.toggle('active')">
+<div class="aspect-[3/4] rounded-lg bg-surface-container-highest border border-outline-variant overflow-hidden card-frame transition-transform duration-300 group-active:scale-95">
+<div class="h-1/2 relative">
+<img alt="Void Weaver" class="w-full h-full object-cover" data-alt="A dark fantasy illustration of a Void Weaver, a shadowy spectral entity with multiple ethereal arms weaving threads of purple cosmic energy. The background is a swirling obsidian nebula. High-contrast lighting with deep violets and sharp gold highlights, rendered in a detailed digital painting style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRm-v8G4UoeybksJhcgGZZQPP_MJFsBEH7QRK7PLwz384Picd6B0J1jUz_K5LsPZprbW2SPADkaS_Y_QASqD6n1qqQDT8jeOxio5ewr-ExPovCxQWEHq33rkmH0YzsblButH3ecJff2-de9l4sj5s9TRvJzXYY3lQytqdPOF4W7KSaMbwClzYuNH1o1Wp69kS6-fKX1dIJ1ZZq6lTfSCZg15wy94AGF3bxsu6JbCdJa0p5GsVpTX4ryxy_o8clT8hZbh1onZoKxVY"/>
+<div class="absolute top-2 right-2 bg-background/80 backdrop-blur-md rounded-full w-6 h-6 flex items-center justify-center border border-primary/50">
+<span class="font-label-sm text-label-sm text-primary">3</span>
+</div>
+</div>
+<div class="p-3 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] h-1/2 flex flex-col justify-between">
+<div>
+<h3 class="font-title-md text-label-sm text-on-surface uppercase tracking-tight">Void Weaver</h3>
+<p class="text-[10px] text-outline mt-1 leading-tight italic">"The silence between stars is its only song."</p>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex gap-1">
+<span class="font-label-sm text-label-sm text-tertiary">2</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" data-icon="swords">swords</span>
+</div>
+<div class="flex gap-1">
+<span class="font-label-sm text-label-sm text-secondary">4</span>
+<span class="material-symbols-outlined text-[12px] text-secondary" data-icon="shield">shield</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -top-1 -right-1 bg-primary text-on-primary w-5 h-5 rounded-full flex items-center justify-center font-label-sm text-[10px] shadow-lg">2</div>
+</div>
+<!-- Card 2 -->
+<div class="relative group">
+<div class="aspect-[3/4] rounded-lg bg-surface-container-highest border border-outline-variant overflow-hidden card-frame">
+<div class="h-1/2 relative">
+<img alt="Solar Flare" class="w-full h-full object-cover" data-alt="A powerful solar flare magic spell manifesting as a massive golden explosion in a dark gothic cathedral. Light rays pierce through stained glass. The aesthetic is heavy gold and obsidian, with cinematic sparks and a feeling of immense heat and holy power." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzmYUIdZsJU41-mJdSZEN8GP8ZsXhdNL8RIbIF0U7ydxS3TkjEf5SC1Y8zPPUPSTA6dbcVlGGQqrBwqiy94ILMjql0_BEOjSSN8VtOPWikZsiwTF6bRJrkgg56vNo49zqu4XWyZvu3Mh5fhWChS5JFbngNl2YhchUQdgkejHpx9uacGiTG5DYBdpn5QZsHRL0Q_tYZ0Jsta_0TE3NSYfkCVxoZzK9DtZn4r0wDECzkehfPQwg5HlV7ErTfhbcCu03PWeINAPnFt0M"/>
+<div class="absolute top-2 right-2 bg-background/80 backdrop-blur-md rounded-full w-6 h-6 flex items-center justify-center border border-tertiary/50">
+<span class="font-label-sm text-label-sm text-tertiary">5</span>
+</div>
+</div>
+<div class="p-3 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] h-1/2 flex flex-col justify-between">
+<div>
+<h3 class="font-title-md text-label-sm text-on-surface uppercase tracking-tight">Solar Flare</h3>
+<p class="text-[10px] text-outline mt-1 leading-tight italic">"Burn the shadows from their very roots."</p>
+</div>
+<div class="bg-tertiary/10 border border-tertiary/30 p-1 rounded">
+<p class="text-[9px] text-tertiary leading-none text-center">Deal 5 damage to all creatures.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="relative group">
+<div class="aspect-[3/4] rounded-lg bg-surface-container-highest border border-outline-variant overflow-hidden card-frame opacity-60">
+<div class="h-1/2 relative">
+<img alt="Abyssal Gate" class="w-full h-full object-cover" data-alt="An ancient stone gate etched with glowing purple runes, opening into a swirling dark abyss. The structure is brutalist and heavy, with chains hanging from the archway. Atmosphere is oppressive and mysterious, featuring dark stone textures and vibrant magical luminance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUvX_9bni2_sgvqFuU6VX4lzmNFS51cqzqt3HsrtQK6Fid61uNf84WX-d2xfaToSmrAJwzzcD6ei0Xt9YVxP0U7pD8CaHK_RdNid-Kl1by7qA2aNmlbyntCRKjTVf5biiD3y8sDZPypNl9WayUdoNwq-qejg16YMi7dtksRRjtKJu9aoauv5R9mArXC08HYUPt5IKhOKGlYVnu3D_frnQL2ceEu7CYnOTLmeV2NmG6_jKh3UjLdXLTrpITNhMzmZFZ0fS-nQxddZ8"/>
+<div class="absolute top-2 right-2 bg-background/80 backdrop-blur-md rounded-full w-6 h-6 flex items-center justify-center border border-outline/50">
+<span class="font-label-sm text-label-sm text-on-surface">4</span>
+</div>
+</div>
+<div class="p-3 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] h-1/2 flex flex-col justify-between">
+<div>
+<h3 class="font-title-md text-label-sm text-on-surface uppercase tracking-tight">Abyssal Gate</h3>
+<p class="text-[10px] text-outline mt-1 leading-tight italic">"The threshold of no return."</p>
+</div>
+<div class="absolute inset-0 flex items-center justify-center bg-background/40 backdrop-blur-[1px]">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-tighter border border-outline px-2 py-1">Locked</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="relative group">
+<div class="aspect-[3/4] rounded-lg bg-surface-container-highest border border-outline-variant overflow-hidden card-frame">
+<div class="h-1/2 relative">
+<img alt="Iron Guardian" class="w-full h-full object-cover" data-alt="A massive stone and iron golem standing guard in a misty dark forest. The golem has glowing green internal mana cores visible through cracks in its chest. The art style is ornate brutalism, heavy and textured, with soft green ambient lighting casting long shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAQhFc5nH2czVyfgSVRNnbFJOj9yypLbDbGQtHwFfeh2630aP-esu5EMx1ZL34An8cxIm_wi4NUb4gdw8IUYIltXT0lptPuwyUhnLn3TNuOo2XGU46E9M7nf_fvfglhySLa1PQ2plKfpA_b8nOiU5jm7UAnh8hrTR7bop1BI9Z9FCMxoNB0FlC8iYh4s_urjxDhg2mLqzf_cNNSrdjumYjyiyEXhcLbXhFKiyuAqzbRFNQGA7KRO_vfgsKvlKUxbDqUdnV3x8RPjY"/>
+<div class="absolute top-2 right-2 bg-background/80 backdrop-blur-md rounded-full w-6 h-6 flex items-center justify-center border border-secondary/50">
+<span class="font-label-sm text-label-sm text-secondary">6</span>
+</div>
+</div>
+<div class="p-3 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] h-1/2 flex flex-col justify-between">
+<div>
+<h3 class="font-title-md text-label-sm text-on-surface uppercase tracking-tight">Iron Guardian</h3>
+<p class="text-[10px] text-outline mt-1 leading-tight italic">"Unyielding. Unmoving. Eternal."</p>
+</div>
+<div class="flex justify-between items-center mt-2">
+<div class="flex gap-1">
+<span class="font-label-sm text-label-sm text-tertiary">4</span>
+<span class="material-symbols-outlined text-[12px] text-tertiary" data-icon="swords">swords</span>
+</div>
+<div class="flex gap-1">
+<span class="font-label-sm text-label-sm text-secondary">8</span>
+<span class="material-symbols-outlined text-[12px] text-secondary" data-icon="shield">shield</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute -top-1 -right-1 bg-primary text-on-primary w-5 h-5 rounded-full flex items-center justify-center font-label-sm text-[10px] shadow-lg">1</div>
+</div>
+</section>
+</main>
+<!-- Bottom Drawer: Deck List -->
+<div class="fixed bottom-16 left-0 w-full z-40 transition-transform duration-500 translate-y-[calc(100%-120px)]" id="deckDrawer">
+<!-- Handle & Quick Info -->
+<div class="bg-surface-container-highest/95 backdrop-blur-xl border-t border-outline-variant rounded-t-full pt-2 pb-1 px-margin-mobile shadow-[0_-10px_30px_rgba(0,0,0,0.8)] cursor-pointer" onclick="toggleDrawer()">
+<div class="w-12 h-1 bg-outline-variant rounded-full mx-auto mb-3"></div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="style">style</span>
+<span class="font-title-md text-label-sm text-on-surface">Active Deck (24)</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-1 rounded-full font-label-sm text-label-sm shadow-[0_0_15px_rgba(183,109,255,0.4)]">
+                    Save Grimoire
+                </button>
+</div>
+</div>
+<!-- Drawer Content (List) -->
+<div class="bg-surface-container-highest/95 backdrop-blur-xl h-[530px] overflow-y-auto px-margin-mobile border-t border-outline-variant/30">
+<div class="space-y-2 py-4">
+<!-- Deck Item 1 -->
+<div class="flex items-center gap-3 bg-surface-container p-2 rounded-lg border border-outline-variant/30">
+<div class="w-10 h-10 rounded bg-primary/20 flex-shrink-0 flex items-center justify-center border border-primary/30">
+<span class="font-label-sm text-primary">3</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<span class="font-label-sm text-label-sm text-on-surface">Void Weaver</span>
+<span class="font-label-sm text-label-sm text-outline">x2</span>
+</div>
+<div class="w-full h-1 bg-outline-variant/30 mt-1 rounded-full overflow-hidden">
+<div class="w-1/2 h-full bg-primary shadow-[0_0_5px_rgba(183,109,255,0.8)]"></div>
+</div>
+</div>
+<button class="text-error/70 hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]" data-icon="do_not_disturb_on">do_not_disturb_on</span>
+</button>
+</div>
+<!-- Deck Item 2 -->
+<div class="flex items-center gap-3 bg-surface-container p-2 rounded-lg border border-outline-variant/30">
+<div class="w-10 h-10 rounded bg-secondary/20 flex-shrink-0 flex items-center justify-center border border-secondary/30">
+<span class="font-label-sm text-secondary">6</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<span class="font-label-sm text-label-sm text-on-surface">Iron Guardian</span>
+<span class="font-label-sm text-label-sm text-outline">x1</span>
+</div>
+<div class="w-full h-1 bg-outline-variant/30 mt-1 rounded-full overflow-hidden">
+<div class="w-full h-full bg-secondary shadow-[0_0_5px_rgba(78,222,163,0.8)]"></div>
+</div>
+</div>
+<button class="text-error/70 hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]" data-icon="do_not_disturb_on">do_not_disturb_on</span>
+</button>
+</div>
+<!-- More items... -->
+<div class="flex items-center gap-3 bg-surface-container p-2 rounded-lg border border-outline-variant/30">
+<div class="w-10 h-10 rounded bg-tertiary/20 flex-shrink-0 flex items-center justify-center border border-tertiary/30">
+<span class="font-label-sm text-tertiary">2</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between">
+<span class="font-label-sm text-label-sm text-on-surface">Mana Siphon</span>
+<span class="font-label-sm text-label-sm text-outline">x3</span>
+</div>
+<div class="w-full h-1 bg-outline-variant/30 mt-1 rounded-full overflow-hidden">
+<div class="w-3/4 h-full bg-tertiary shadow-[0_0_5px_rgba(233,195,73,0.8)]"></div>
+</div>
+</div>
+<button class="text-error/70 hover:text-error transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]" data-icon="do_not_disturb_on">do_not_disturb_on</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-highest/95 backdrop-blur-lg border-t border-outline-variant shadow-[0_-4px_20px_rgba(0,0,0,0.5)] rounded-t-full">
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+<span class="font-label-sm text-label-sm">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 animate-pulse" href="#">
+<span class="material-symbols-outlined" data-icon="style" style="font-variation-settings: 'FILL' 1;">style</span>
+<span class="font-label-sm text-label-sm">Decks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-sm text-label-sm">Market</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Search/Add -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-[0_0_20px_rgba(183,109,255,0.6)] flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[32px]" data-icon="search">search</span>
+</button>
+<script>
+        let isDrawerOpen = false;
+        const drawer = document.getElementById('deckDrawer');
+        
+        function toggleDrawer() {
+            if (isDrawerOpen) {
+                drawer.style.transform = 'translateY(calc(100% - 120px))';
+            } else {
+                drawer.style.transform = 'translateY(0)';
+            }
+            isDrawerOpen = !isDrawerOpen;
+        }
+
+        // Add Mana Pulse Interaction to Cards
+        document.querySelectorAll('.card-frame').forEach(card => {
+            card.addEventListener('mousedown', function() {
+                this.classList.add('scale-95');
+                const pulse = document.createElement('div');
+                pulse.className = 'absolute inset-0 bg-primary/20 animate-ping rounded-lg';
+                this.appendChild(pulse);
+                setTimeout(() => pulse.remove(), 600);
+            });
+            card.addEventListener('mouseup', function() {
+                this.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

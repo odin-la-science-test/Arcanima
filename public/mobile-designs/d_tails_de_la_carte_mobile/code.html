@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Grimoire - Card Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr
+    }
+.parchment-texture {
+    background-color: #1b1b1e;
+    background-image: radial-gradient(circle at 50% 50%, rgba(221, 183, 255, 0.05) 0%, transparent 80%);
+    position: relative
+    }
+.parchment-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCSGZHpjGIn77qXJHqt4D7xl8T9w6i8ElXoEFb0goLx9WGUCrPp5oLW-ziMeASeSnRW4CEk6STELFe2H-pUwL3x8Q_hFx81yOBlvBa4gkRESASb6oHH_amrL_xAGPOObT40XNcTWQyQGXBb1oAhGWYQJkdG13dsV-WT2Qz_eSz5nungzmMaKZ8ZTobyuzHboU4M1dj5Sg0yojcPoipwkbKZXlOmpUzC-Q00pgZcXucUcRfmwPbRarR1RaVDYlmdUcg5gGy07wILnPA);
+    pointer-events: none
+    }
+.octagonal-btn {
+    clip-path: polygon(10% 0, 90% 0, 100% 30%, 100% 70%, 90% 100%, 100% 100%, 10% 100%, 0 70%, 0 30%);
+    clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px)
+    }
+.mana-pulse:active {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
+    transform: scale(0.95);
+    transition: all 0.15s ease
+    }
+.rune-chip {
+    border: 1px solid #4d4354;
+    background: linear-gradient(145deg, #1f1f22, #131316)
+    }
+@keyframes subtle-glow {
+    0%, 100% {
+        opacity: 0.4;
+        } 50% {
+        opacity: 0.8;
+        }
+    }
+.animate-glow {
+    animation: subtle-glow 3s infinite ease-in-out
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#cfc2d6",
+                      "on-primary-fixed-variant": "#6900b3",
+                      "surface-container-high": "#2a2a2d",
+                      "secondary": "#4edea3",
+                      "error-container": "#93000a",
+                      "on-secondary": "#003824",
+                      "on-secondary-fixed-variant": "#005236",
+                      "tertiary-container": "#cba72f",
+                      "on-surface": "#e4e1e6",
+                      "tertiary-fixed": "#ffe088",
+                      "secondary-fixed": "#6ffbbe",
+                      "inverse-surface": "#e4e1e6",
+                      "surface-container-low": "#1b1b1e",
+                      "secondary-container": "#00a572",
+                      "tertiary-fixed-dim": "#e9c349",
+                      "surface": "#131316",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#ddb7ff",
+                      "on-tertiary": "#3c2f00",
+                      "inverse-on-surface": "#303033",
+                      "on-secondary-container": "#00311f",
+                      "inverse-primary": "#842bd2",
+                      "on-tertiary-fixed": "#241a00",
+                      "on-primary": "#490080",
+                      "on-background": "#e4e1e6",
+                      "surface-container-highest": "#353438",
+                      "on-tertiary-fixed-variant": "#574500",
+                      "primary-fixed-dim": "#ddb7ff",
+                      "background": "#131316",
+                      "surface-container-lowest": "#0e0e11",
+                      "surface-bright": "#39393c",
+                      "primary": "#ddb7ff",
+                      "surface-variant": "#353438",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#131316",
+                      "outline": "#988d9f",
+                      "on-tertiary-container": "#4e3d00",
+                      "on-primary-fixed": "#2c0051",
+                      "surface-container": "#1f1f22",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#002113",
+                      "primary-fixed": "#f0dbff",
+                      "primary-container": "#b76dff",
+                      "outline-variant": "#4d4354",
+                      "secondary-fixed-dim": "#4edea3",
+                      "tertiary": "#e9c349",
+                      "on-primary-container": "#400071"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "64px",
+                      "unit": "4px",
+                      "container-max": "1440px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Playfair Display"],
+                      "title-md": ["Playfair Display"],
+                      "body-md": ["Manrope"],
+                      "headline-lg-mobile": ["Playfair Display"],
+                      "display-lg": ["Playfair Display"],
+                      "body-lg": ["Manrope"],
+                      "label-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant bg-surface-container/90 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.2)] flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-primary text-2xl" onclick="history.back()">arrow_back</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-surface-tint tracking-tighter">Aether Grimoire</h1>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-primary">1,250 Essence</span>
+</div>
+</header>
+<main class="pt-16 max-w-md mx-auto">
+<!-- Large Card Image Section -->
+<section class="relative p-6 group">
+<div class="relative aspect-[3/4] rounded-lg overflow-hidden border-4 border-surface-container-highest shadow-[0_0_40px_rgba(0,0,0,0.8)]">
+<!-- Inner Gold Filigree Frame -->
+<div class="absolute inset-0 border-[1px] border-tertiary/30 m-2 pointer-events-none z-10"></div>
+<img alt="Void Sentinel Card Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A detailed digital painting of a void-touched celestial knight, clad in obsidian plate armor with glowing violet runes etched into the metal. The knight stands amidst swirling cosmic dust and ethereal purple flames, wielding a crystalline greatsword that hums with dark energy. The lighting is dramatic and high-contrast, casting long shadows against a backdrop of deep space and distant nebulae. The overall style is dark fantasy with a premium, ritualistic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBlKrqRsjO-fE25tSPF0IEKZ3IvA7ZsiqNPFqai8ecwlLSiHqoqFdrWSQbCAvApJaX4Q03I4mSWyrC2ed5LD5akoWjkASCKnMCWcDKzi_rlGDOuw-AMBeS5PfRXq01yhm1lMHbyfJ3B4BRssxWN2i13MyuMWQSPcuhE2Dd61FqDGn0aJkAFgJDuxKY4qGyfDyrQIsGI-Cu69EeUIj5POKppj93zaSMY3Zk2Q5bCkMRJoowut_9cSrXWLxP5EOxxBCbyS5x8sH0RsM"/>
+<!-- Card Identity Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-surface-container-lowest to-transparent z-20">
+<div class="flex justify-between items-end">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Legendary Construct</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Void Sentinel</h2>
+</div>
+<div class="rune-chip px-3 py-1 flex items-center gap-1 border-tertiary">
+<span class="material-symbols-outlined text-tertiary text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-sm text-label-sm text-tertiary">Level IX</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Glow -->
+<div class="absolute -inset-4 bg-primary/10 blur-3xl -z-10 animate-glow"></div>
+</section>
+<!-- Stats Section -->
+<section class="px-margin-mobile grid grid-cols-4 gap-2 mb-8">
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<span class="material-symbols-outlined text-error mb-1">swords</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">ATK</span>
+<span class="font-title-md text-title-md text-error">2,450</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary mb-1">shield</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">DEF</span>
+<span class="font-title-md text-title-md text-secondary">1,800</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<span class="material-symbols-outlined text-primary mb-1">bolt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">COST</span>
+<span class="font-title-md text-title-md text-primary">8</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<span class="material-symbols-outlined text-tertiary mb-1">show_chart</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">YIELD</span>
+<span class="font-title-md text-title-md text-tertiary">12%</span>
+</div>
+</section>
+<!-- Abilities List -->
+<section class="px-margin-mobile mb-8">
+<div class="flex items-center gap-2 mb-4">
+<span class="h-[1px] flex-grow bg-outline-variant"></span>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-[0.2em]">Inscribed Abilities</h3>
+<span class="h-[1px] flex-grow bg-outline-variant"></span>
+</div>
+<div class="space-y-4">
+<div class="parchment-texture p-4 rounded-lg border-l-4 border-primary">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">flare</span>
+<h4 class="font-title-md text-sm text-on-surface uppercase">Aether Fracture</h4>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant">When this card enters the battlefield, target opponent discards 2 random essence tokens. If they cannot, deal 400 direct damage to their Sanctum.</p>
+</div>
+<div class="parchment-texture p-4 rounded-lg border-l-4 border-secondary">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">vertex_cluster</span>
+<h4 class="font-title-md text-sm text-on-surface uppercase">Event Horizon</h4>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant">Ongoing: Opposing creatures with less than 1,000 ATK cannot declare an attack against your front line.</p>
+</div>
+</div>
+</section>
+<!-- Lore Text Section -->
+<section class="px-margin-mobile mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="h-[1px] flex-grow bg-outline-variant"></span>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-[0.2em]">Archival Record</h3>
+<span class="h-[1px] flex-grow bg-outline-variant"></span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute -left-2 -top-2 opacity-10 text-4xl text-primary">format_quote</span>
+<p class="italic font-body-md text-on-surface-variant leading-relaxed text-sm pl-4 border-l border-outline-variant">
+                    "Forged in the silence between dying stars, the Sentinel knows no master but the Void. It does not guard treasure, nor kingdom; it guards the exit from existence itself. To gaze upon its obsidian visor is to realize that the universe is just a dream that is finally waking up."
+                </p>
+<div class="mt-4 text-right">
+<span class="font-label-sm text-label-sm text-tertiary">— High Chronicler Xylos</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full p-margin-mobile bg-surface-container-lowest/80 backdrop-blur-xl border-t border-outline-variant z-50 flex items-center gap-4">
+<button class="rune-chip w-14 h-14 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl">favorite</span>
+</button>
+<button class="octagonal-btn flex-grow bg-primary text-on-primary h-14 flex items-center justify-center gap-2 font-title-md text-title-md mana-pulse shadow-[0_0_15px_rgba(183,109,255,0.4)]">
+<span class="material-symbols-outlined">add_to_photos</span>
+            Add to Deck
+        </button>
+</div>
+<!-- Navigation suppressed per Destination Rule as this is a Details sub-page -->
+<script>
+        // Micro-interaction: Hover/Touch effect for the primary button
+        const btn = document.querySelector('.octagonal-btn');
+        btn.addEventListener('touchstart', () => {
+            btn.style.boxShadow = '0 0 40px rgba(168, 85, 247, 1)';
+        });
+        btn.addEventListener('touchend', () => {
+            btn.style.boxShadow = '0 0 15px rgba(183, 109, 255, 0.4)';
+        });
+
+        // Interactive Lore Scroll
+        window.addEventListener('scroll', () => {
+            const opacity = Math.min(1, window.scrollY / 400);
+            document.querySelector('header').style.backgroundColor = `rgba(31, 31, 34, ${0.9 + (opacity * 0.1)})`;
+        });
+    </script>
+</body></html>

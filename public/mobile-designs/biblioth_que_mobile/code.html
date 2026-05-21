@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Grimoire - Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Manrope:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#cfc2d6",
+                    "on-primary-fixed-variant": "#6900b3",
+                    "surface-container-high": "#2a2a2d",
+                    "secondary": "#4edea3",
+                    "error-container": "#93000a",
+                    "on-secondary": "#003824",
+                    "on-secondary-fixed-variant": "#005236",
+                    "tertiary-container": "#cba72f",
+                    "on-surface": "#e4e1e6",
+                    "tertiary-fixed": "#ffe088",
+                    "secondary-fixed": "#6ffbbe",
+                    "inverse-surface": "#e4e1e6",
+                    "surface-container-low": "#1b1b1e",
+                    "secondary-container": "#00a572",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "surface": "#131316",
+                    "error": "#ffb4ab",
+                    "surface-tint": "#ddb7ff",
+                    "on-tertiary": "#3c2f00",
+                    "inverse-on-surface": "#303033",
+                    "on-secondary-container": "#00311f",
+                    "inverse-primary": "#842bd2",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-primary": "#490080",
+                    "on-background": "#e4e1e6",
+                    "surface-container-highest": "#353438",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "primary-fixed-dim": "#ddb7ff",
+                    "background": "#131316",
+                    "surface-container-lowest": "#0e0e11",
+                    "surface-bright": "#39393c",
+                    "primary": "#ddb7ff",
+                    "surface-variant": "#353438",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#131316",
+                    "outline": "#988d9f",
+                    "on-tertiary-container": "#4e3d00",
+                    "on-primary-fixed": "#2c0051",
+                    "surface-container": "#1f1f22",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#002113",
+                    "primary-fixed": "#f0dbff",
+                    "primary-container": "#b76dff",
+                    "outline-variant": "#4d4354",
+                    "secondary-fixed-dim": "#4edea3",
+                    "tertiary": "#e9c349",
+                    "on-primary-container": "#400071"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "unit": "4px",
+                    "container-max": "1440px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Playfair Display"],
+                    "title-md": ["Playfair Display"],
+                    "body-md": ["Manrope"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["Manrope"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-glow:hover {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+        .mana-pulse:active {
+            transform: scale(0.95);
+            filter: brightness(1.2);
+            transition: all 0.1s ease;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #131316; }
+        ::-webkit-scrollbar-thumb { background: #cba72f; border-radius: 10px; }
+        .ritual-bg {
+            background-image: radial-gradient(circle at 50% 50%, #1a1421 0%, #0f0f12 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md ritual-bg">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 border-b border-outline-variant bg-surface-container/90 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.2)] flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-primary/30 overflow-hidden shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A mystical portrait of a sorcerer in dark velvet robes with silver filigree, set against a backdrop of swirling purple nebulae and ancient arcane circles. The style is painterly and detailed dark fantasy with a focus on dramatic low-key lighting and intense highlights on the face and glowing eyes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSSaEvBP1a95DeTu_3-1RXzsmtwOA7LnoR9yDnz-9sxDuLiQe29ee7KqWztBp1DTnwvy9HpqGxdijUsp8jJVdsXzSz-9K7qdBp4Y_ejLRMyGwaZK0uebvOQUDnPrKe0SRUmlWf0szMFg37nF7fdYB4SKQ-gh5Eltc_c-gG_CWmzyb6uCq2G4DMWMkAZtPGCkBGxWyXdLp7deO2ZhyQr1x71QWPZ0SbRLTi60pff1nKmpim-PI_NgpNicwOg83UOOGlAg4Chq_JhdQ"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-surface-tint tracking-tighter">Aether Grimoire</h1>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-tertiary text-[18px]">auto_awesome</span>
+<span class="font-label-sm text-label-sm text-on-surface">1,250 Essence</span>
+</div>
+</header>
+<main class="pt-20 pb-24 px-margin-mobile">
+<!-- Search & Filter Bar -->
+<section class="mb-6 space-y-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-on-surface placeholder:text-outline/50 focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none italic shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]" placeholder="Inscribe card name..." type="text"/>
+</div>
+<!-- Filter Chips - Styled as "Runes" -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-primary bg-primary-container/20 text-primary font-label-sm text-label-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">filter_list</span>
+                    All Factions
+                </button>
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap hover:border-primary transition-colors">
+                    Rare+
+                </button>
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap hover:border-primary transition-colors">
+                    Cost: 0-3
+                </button>
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-outline-variant text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap hover:border-primary transition-colors">
+                    Spells
+                </button>
+</div>
+</section>
+<!-- Card Grid (2 Columns) -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-low border border-outline-variant p-1.5 rounded-lg flex flex-col relative card-glow transition-all duration-300">
+<div class="absolute top-2 right-2 z-10 bg-surface/80 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center border border-tertiary-container/30 shadow-lg">
+<span class="font-label-sm text-label-sm text-tertiary-fixed">4</span>
+</div>
+<div class="relative aspect-[3/4] rounded overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A majestic black dragon with glowing violet scales perched atop a crumbling gothic spire. The night sky is filled with chaotic magical energy and lightning. High contrast digital painting in deep obsidian and vibrant ether purple, embodying a dark ritualistic fantasy atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1exbS7cMbyhLd95UHal2S7c5PjgeDuck1mD8aK52TT3FMKMZ7HqZRrrj6vjnXLKTe0X8nuqLYrHbwxCcZtEsX9tszfIWhrbJdBfAUS92wM95oOF_vuoRghx4eoZ9P2THoyTJL2RguCTzIgar2tBoFgTLPDf2TMznzxjDzqvrkBPtEgFt0mp2GKw3BJmQxrfK5xgr7SLstD9bNf6ks-ROSPzOXacGzxi2br13Yct62hYweyrFt3zzopDoPf1J-kpkI-r9NpwtQ1Nw"/>
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+</div>
+<div class="p-2 bg-surface-container-lowest mt-1 rounded border-t border-outline-variant/20">
+<h3 class="font-title-md text-label-sm text-primary truncate">Void Reaver</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary">diamond</span>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-widest">Legendary</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low border border-outline-variant p-1.5 rounded-lg flex flex-col relative card-glow transition-all duration-300">
+<div class="absolute top-2 right-2 z-10 bg-surface/80 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center border border-tertiary-container/30 shadow-lg">
+<span class="font-label-sm text-label-sm text-tertiary-fixed">2</span>
+</div>
+<div class="relative aspect-[3/4] rounded overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="An ornate ancient scroll inscribed with glowing gold runes, hovering above a dark stone altar. Wisps of purple smoke rise from the parchment. The scene is illuminated by the soft luminescence of the runes, creating a mysterious and sacred ritualistic mood in a dark chamber." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxGXHfnXroksi2RSvPDZKlGuEj6KG4qANaolDw-GNyHtcXsDb-pUx2aP5DrTMX8lBE_Q_exfoxNHKO5GyFS3vx86I1HgqERvvKYk1qzh_LmQ176MRNhZOh3AtWvJKmgMNV84cO_VoWEQKcpFA3M_ujLMW5xty4C2a_F8nnUL58TP4R3-Q4wEk1OJ0XgkqRYMp4okbr-6UQ-eXyWKJV_265eZdW3rI65144pUk63Rr3IFr3otVGWZjZyMhmRIjpT1wS8bSQyRfGYaA"/>
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+</div>
+<div class="p-2 bg-surface-container-lowest mt-1 rounded border-t border-outline-variant/20">
+<h3 class="font-title-md text-label-sm text-primary truncate">Eldritch Rite</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-secondary">eco</span>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-widest">Uncommon</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low border border-outline-variant p-1.5 rounded-lg flex flex-col relative card-glow transition-all duration-300">
+<div class="absolute top-2 right-2 z-10 bg-surface/80 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center border border-tertiary-container/30 shadow-lg">
+<span class="font-label-sm text-label-sm text-tertiary-fixed">7</span>
+</div>
+<div class="relative aspect-[3/4] rounded overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A towering cathedral made of polished obsidian and gold filigree, standing amidst a swirling cosmic vortex. Ethereal light beams pierce through stained glass windows. Ornate brutalism architecture at a celestial scale, rendered with sharp details and deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxOncMS72rjbGKzFV845Cvzcf32dT2rHmIFJE00qv6HJZVpxdD2wlctdynwYMS__lMuBK7FIDSYYldBot2do5w4Bq29grZq4xnHD8DDRIXNhmj-kJL1_2Pa6K5X42-WYq6yb6hKdzNwzcK2kGpY2XHqYSNYxscL04iz7CNe8xN_tR-jxnLyHesMw9WBALmZxYu3hcmCaD7N0prY_wF2XuWUAb-tfjYtGSI6SL9T9E8-bHOo7tkjFX1sZjEAkxrX-KlACqVMMI2z_w"/>
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+</div>
+<div class="p-2 bg-surface-container-lowest mt-1 rounded border-t border-outline-variant/20">
+<h3 class="font-title-md text-label-sm text-primary truncate">Obsidian Citadel</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary">diamond</span>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-widest">Legendary</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low border border-outline-variant p-1.5 rounded-lg flex flex-col relative card-glow transition-all duration-300">
+<div class="absolute top-2 right-2 z-10 bg-surface/80 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center border border-tertiary-container/30 shadow-lg">
+<span class="font-label-sm text-label-sm text-tertiary-fixed">3</span>
+</div>
+<div class="relative aspect-[3/4] rounded overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A hooded figure holding a glowing crystalline staff in a frozen forest. Frost patterns crawl over the frame. The staff emits a cold blue and purple radiance that illuminates the falling snow. Cinematic dark fantasy style with heavy atmosphere and metallic texture accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL4LvrN5ztjDOVSz_QCuEd--qrqEnOWQxB_E2Qy_oQzDH6Xi4H6ZPYTeBiThQ8osGG_9Hm69-nNJ42PRHohZvzNiYHWOOtFVCDd1C6XEb689eaMq5hQXliaFV0Ry6Aq1OZPb9-LEmh8qQvt7O8FUP-8GwMYZxodcjjE1Y1UT2sun8d_iu0fJ3njtByCOle6Nl5me3429RIwBGCNJy6NgfYydJ1sQn57hQLvQXQBYN1qe1rszxayaFjO5QE62avsOc5DnX9YXzXrro"/>
+<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+</div>
+<div class="p-2 bg-surface-container-lowest mt-1 rounded border-t border-outline-variant/20">
+<h3 class="font-title-md text-label-sm text-primary truncate">Frost Weaver</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-outline">stars</span>
+<span class="font-label-sm text-[10px] text-outline uppercase tracking-widest">Rare</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB for Contextual Action (Filtering/Deckbuilding) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary-container rounded-full shadow-[0_4px_20px_rgba(168,85,247,0.6)] flex items-center justify-center z-40 hover:scale-110 active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 border-t border-outline-variant bg-surface-container-highest/95 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.5)] rounded-t-full">
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 animate-pulse active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">library_books</span>
+<span class="font-label-sm text-label-sm">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="font-label-sm text-label-sm">Decks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-secondary-fixed transition-all active:scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-sm text-label-sm">Market</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for chips
+        document.querySelectorAll('button.rounded-full').forEach(chip => {
+            chip.addEventListener('click', () => {
+                if (!chip.classList.contains('bg-primary-container/20')) {
+                    chip.classList.add('bg-primary-container/20', 'border-primary', 'text-primary');
+                    chip.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                } else {
+                    chip.classList.remove('bg-primary-container/20', 'border-primary', 'text-primary');
+                    chip.classList.add('border-outline-variant', 'text-on-surface-variant');
+                }
+            });
+        });
+
+        // Atmospheric mana pulse effect on card click
+        document.querySelectorAll('.card-glow').forEach(card => {
+            card.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98)';
+                this.style.filter = 'brightness(1.1)';
+            });
+            card.addEventListener('mouseup', function() {
+                this.style.transform = 'scale(1)';
+                this.style.filter = 'brightness(1)';
+            });
+        });
+    </script>
+</body></html>
